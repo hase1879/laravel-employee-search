@@ -49,4 +49,8 @@ class User extends Authenticatable
     public function seet(){
         return $this->hasOne(Seet::class);
     }
+
+    public function employee(){
+        return $this->hasOne(Employee::class);
+    }
 }

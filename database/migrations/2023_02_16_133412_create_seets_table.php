@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('seets', function (Blueprint $table) {
             $table->id();
+            /*
             $table->foreignID('user_id')
                 ->constrained()
-                ->onDelete('cascade');
+                ->onDelete('cascade')->nullable();
+            */
             $table->string('seetnumber')->nullable();
             $table->timestamps();
-            });
+        });
     }
 
     /**

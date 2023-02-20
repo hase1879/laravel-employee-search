@@ -13,18 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sitdowns', function (Blueprint $table) {
+        Schema::create('Employees', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignID('user_id')
-                ->constrained()
-                ->onDelete('cascade')->nullable();
+            $table->foreignId('user_id')
+            ->constrained('users')
+            ->onDelete('cascade');
 
-            $table->foreignID('seet_id')
-                ->constrained('seets')
-                ->onDelete('cascade')->nullable();
-
-            $table->string('status')->nullable();
+            $table->string('所属支社')->nullable();
+            $table->string('所属部署')->nullable();
 
             $table->timestamps();
         });
@@ -37,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sitdowns');
+        Schema::dropIfExists('Employees');
     }
 };

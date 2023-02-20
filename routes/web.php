@@ -27,4 +27,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // 座席
 Route::get('/seets', [SeetController::class, 'index'])->name('seets.index')->middleware('auth');
 
-Route::put('/seets/{seet}', [SeetController::class, 'update'])->name('seets.update')->middleware('auth');
+// 座席登録の更新
+Route::patch('/seets/{id}', [SeetController::class, 'update'])->name('seets.update')->middleware('auth');
+
+
+Route::get('/seets/test', [App\Http\Controllers\SeatTestController::class, 'doTestService'])->middleware('auth');

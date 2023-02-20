@@ -16,13 +16,15 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body style="padding: 60px 0;">
+<body>
     <div id="app">
         @include('layouts.header')
 
         <main class="py-4">
             @yield('content')
         </main>
+
+        <x-common-footer />
 
         @include('layouts.footer')
     </div>
