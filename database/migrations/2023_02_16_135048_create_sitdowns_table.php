@@ -18,13 +18,13 @@ return new class extends Migration
 
             $table->foreignID('user_id')
                 ->constrained()
-                ->onDelete('cascade')->nullable();
+                ->onDelete('cascade');
 
             $table->foreignID('seet_id')
                 ->constrained('seets')
-                ->onDelete('cascade')->nullable();
+                ->onDelete('cascade');
 
-            $table->string('status')->nullable();
+            $table->integer('status');
 
             $table->timestamps();
         });

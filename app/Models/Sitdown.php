@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Sitdown extends Model
 {
     const STATUS_CHAKUSEKI = 1;
-    const STATUS_RISEKI = 2;
-    const STATUS_KAIGI = 3;
+    const STATUS_KAIGI = 2;
+    const STATUS_RISEKI = 3;
 
     use HasFactory;
 

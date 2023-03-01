@@ -2,45 +2,58 @@
 
 @section('content')
 <div class="container">
-<div class="row">
+    <div class="row">
+        {{-- サイドバー --}}
+        <div class="col-2">
+            @include('layouts.sidebar', ['user_results' => $user_results, 'employees' => $employees, 'employees_tree' => $tree])
+        </div>
 
-    {{-- サイドバー --}}
-    <div class="col-5">
-        @include('layouts.sidebar', ['user_results' => $user_results, '所属支社s' => $所属支社s, '所属部署s' => $所属部署s, 'employees' => $employees, 'employees_tree' => $tree])
+        {{-- 座席表 --}}
+        <div class="col-10">
+        @include('layouts.seat-chart', ['seats' => $seats])
+        </div>
     </div>
-    {{-- 中央 --}}
-    <div class="col-7">
-        <table>
-            <tr>
-                <th>seetnumber</th>
-                <th>name</th>
-                <th>status</th>
-            </tr>
 
-            @foreach ($seets as $seet)
+    <div class="row">
+
+        <div class="col-10">
+            <h1>座席表</h1>
+
+            @if (session('flash_message_notchakuseki'))
+                <p>{{ session('flash_message_notchakuseki') }}</p>
+            @else
+                <p>{{ session('flash_message') }}</p>
+            @endif
+
+            <table class="products-table">
                 <tr>
-
-                    <td>{{ $seet->seetnumber }}</td>
-
-                    {{-- <td><a href="{{ route('seets.edit') }}"> --}}
-
-                    {{-- {{-- 座席者変更モーダル --}}
-                    @include('modals.edit_seet')
-
-                    {{-- 着席状況モーダル --}}
-                    {{-- @include('modals.delete_goal') --}}
-
-                    <td>
-                        @if($seet->user)
-                        <a href="#" class="px-2 fs-5 fw-bold link-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#edit_seet{{ $seet->id }}">{{ $seet->user->name }}</a>
-                        @endif
-                    </td>
-
+                    <th>座席番号</th>
+                    <th>氏名</th>
+                    <th>着席状況</th>
                 </tr>
-            @endforeach
-
-        </table>
+                @foreach ($seats as $seat)
+                    <tr>
+                        <td><a href="{{ route( 'seets.edit', $seat)}}">{{ $seat->seetnumber }}</a></td>
+                        @if(isset($sitdowns[$seat->id]))
+                            @foreach($sitdowns[$seat->id] as $sitdown)
+                            <td>
+                                {{ $sitdown->user->name }}
+                            </td>
+                            <td>{{ $sitdown->status }}</td>
+                            @endforeach
+                        @endif
+                    </tr>
+                @endforeach
+            </table>
+        </div>
     </div>
+
+    {{-- <footer>
+        <p class="copyright">&copy; employee-search All rights reserved.</p>
+    </footer> --}}
+
 </div>
-</div>
+
+
+
 @endsection

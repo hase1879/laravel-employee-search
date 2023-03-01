@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            AdminTablesSeeder::class,
             UsersTableSeeder::class,
             SeetsTableSeeder::class,
             SitdownsTableSeeder::class,

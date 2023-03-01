@@ -14,7 +14,7 @@ class SeatTestController extends Controller
 
     function doTestService(SeatService $service){
 
-        $seat = Seet::find(1);
+        $seat = Seet::find(3);
         $user = Auth::user();
         $service->着席($user, $seat);
 
@@ -22,7 +22,9 @@ class SeatTestController extends Controller
 
         $seats = Seet::all();
         $sitdowns = Sitdown::with("user")->get()->groupBy("seet_id");
-        //dd( $sitdowns);
+
+        $testsitdowns = Sitdown::all();
+
 
         return view("seat-list",[
             "seats" => $seats,

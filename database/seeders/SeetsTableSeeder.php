@@ -18,22 +18,18 @@ class SeetsTableSeeder extends Seeder
     public function run()
     {
         Seet::create([
-            'user_id' => 1,
             'seetnumber' => 'A-1',
         ]);
 
         Seet::create([
-            'user_id' => 2,
             'seetnumber' => 'A-2',
         ]);
 
         Seet::create([
-            'user_id' => 3,
             'seetnumber' => 'A-3',
         ]);
 
         Seet::create([
-            'user_id' => 4,
             'seetnumber' => 'A-4',
         ]);
     }

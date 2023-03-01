@@ -28,7 +28,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/seets', [SeetController::class, 'index'])->name('seets.index')->middleware('auth');
 
 // 座席登録の更新
-Route::patch('/seets/{id}', [SeetController::class, 'update'])->name('seets.update')->middleware('auth');
+Route::get('/seets/{id}/edit', [SeetController::class, 'edit'])->name('seets.edit')->middleware('auth');
+// Route::get('/seets/{id}', [SeetController::class, 'update'])->name('seets.update')->middleware('auth');
+Route::patch('/seets/{id}', [SeetController::class, 'update_status'])->name('seets.update_status')->middleware('auth');
 
 
 Route::get('/seets/test', [App\Http\Controllers\SeatTestController::class, 'doTestService'])->middleware('auth');
+
+
+Route::get('/seats/map', [App\Http\Controllers\TestMapController::class, 'showMap'])->middleware('auth');
+
+// js学習用
+Route::get('/seets/seat-chart', function () {
+    return view('seat-chart');
+});

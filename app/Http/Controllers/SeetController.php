@@ -9,65 +9,124 @@ use App\Models\Seet;
 use App\Models\User;
 use App\Models\Employee;
 use App\Services\SearchEmployeeService;
+use App\Services\TreeDataEmployeeService;
 use Illuminate\Support\Facades\DB;
+use App\Services\SeatService;
 
 class SeetController extends Controller
 {
     public function index(Request $request){
 
-        $seets = Seet::all();
-
-        $users = User::all();
+        $seats = Seet::all();
 
         // 検索機能
         $service = new SearchEmployeeService();
         $user_results = $service->search($request->keyword);
 
-        // カテゴリ機能
-        // $major_category_names = Category::pluck('major_category_name')->unique();
-        $所属支社s = Employee::pluck('所属支社')->unique();
-        $所属部署s = DB::table('employees')->distinct()->select('所属支社','所属部署')->get();
-        $employees = Employee::with('user')->get();
+
+        // // // データのツリー化
+        // $employees = Employee::with('user')->get();
+        // $service = new TreeDataEmployeeService();
+        // $tree = $service->treedata($employees);
 
 
+        $keyword = $request->keyword;
 
-        $tree = $employees->groupBy("所属支社")->map(function($collection){
-            return $collection->groupBy("所属部署");
-        });
+        $employees = Employee::all();
 
-
-        /*
         $tree = [];
         foreach($employees as $employee){
             $sishaName = $employee->所属支社;
             $bushoName = $employee->所属部署;
 
+            if($keyword && strpos($employee->user->name, $keyword) === false){
+                continue;
+            }
+
             if(!isset($tree[$sishaName]))$tree[$sishaName] = [];
             if(!isset($tree[$sishaName][$bushoName]))$tree[$sishaName][$bushoName] = [];
             $tree[$sishaName][$bushoName][] = $employee;
         }
-        */
 
-        // $所属支社_部署s = Category::all()->unique(function ($item) {
-        //  return $item['所属支社'].$item['所属部署'];
-        //  });
+        $branches = [];
+        foreach($employees as $employee){
+            $sishaName = $employee->所属支社;
 
+            if(!isset($branches[$sishaName])){
+                $branches[$sishaName] = new Tree_Branch($sishaName);
+            }
 
-        return view('seets.index',compact('seets','users', 'user_results', '所属支社s', '所属部署s', 'employees', 'tree'));
+            $branches[$sishaName]->addEmployee($employee);
+        }
+
+        // 座席表一覧
+        $seatservice = new SeatService();
+        $sitdowns = Sitdown::with("user")->get()->groupBy("seet_id");
+
+        return view('seets.index',compact('seats', 'sitdowns', 'user_results', 'employees', 'tree', 'keyword' /*'branches'*/));
     }
 
-    // 更新ページ
     public function edit($id)
     {
-        return view('seets.edit', compact('seet'));
+        return view('seets.edit', compact('id'));
     }
 
-    public function update(Request $request, $id)
+    public function update_status(Request $request, $id)
     {
-        // 座席者の変更
-        // $seet->user_id = $user->id;
-        $seet->save();
+
+        $service = new SeatService();
+        $seat = Seet::find($id);
+        $user = Auth::user();
+
+        $status_number = $request->input('status_number');
+
+        if ($status_number == 1){
+            $service->着席($user, $seat);
+        }elseif ($status_number == 2){
+            $service->会議中に変更($user, $seat);
+        }elseif ($status_number == 3){
+            $service->一時的に離席した($user, $seat);
+        }else{
+            $service->離席($user, $seat);
+        }
 
         return redirect()->route('seets.index');
     }
+}
+
+class Tree_Branch {
+
+    public $name;
+    public $groups = [];
+
+    function __construct($name){
+        $this->name = $name;
+    }
+
+    function getGroup($bushoName){
+        if(!isset($this->groups[$bushoName])){
+            $group = new Tree_Group();
+            $group->name = $bushoName;
+            $this->groups[$bushoName] = $group;
+        }
+        return $this->groups[$bushoName];
+    }
+
+    function addEmployee($employee){
+        $bushoName = $employee->所属部署;
+        $group = $this->getGroup($bushoName);
+        $group->addEmployee($employee);
+    }
+}
+
+
+class Tree_Group {
+
+    public $name;
+    public $employees;
+
+    function addEmployee($employee){
+        $this->employees[] = $employee;
+    }
+
 }

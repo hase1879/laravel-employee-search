@@ -9,6 +9,10 @@ class Seet extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'seetnumber',
+    ];
+
     public function sitdown(){
         return $this->hasOne(Sitdown::class);
     }

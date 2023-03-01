@@ -14,12 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('seets', function (Blueprint $table) {
-            $table->id();
-            /*
-            $table->foreignID('user_id')
-                ->constrained()
-                ->onDelete('cascade')->nullable();
-            */
+            $table->id()->nullable();
             $table->string('seetnumber')->nullable();
             $table->timestamps();
         });

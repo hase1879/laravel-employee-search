@@ -18,26 +18,26 @@ class SitdownsTableSeeder extends Seeder
     {
         Sitdown::create([
             'user_id' => 1,
-            'seet_id' => 1,
-            'status' => '着席中',
+            'seet_id' => 2,
+            'status' => 1,
         ]);
 
         Sitdown::create([
             'user_id' => 2,
-            'seet_id' => 2,
-            'status' => '着席中',
+            'seet_id' => 1,
+            'status' => 2,
         ]);
 
         Sitdown::create([
             'user_id' => 3,
             'seet_id' => 3,
-            'status' => '離席中',
+            'status' => 2,
         ]);
 
         Sitdown::create([
             'user_id' => 4,
             'seet_id' => 4,
-            'status' => '会議中',
+            'status' => 3,
         ]);
     }
 }

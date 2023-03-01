@@ -16,7 +16,6 @@ class SearchEmployeeService {
         }
 
         return $user_results;
-
     }
 
 }

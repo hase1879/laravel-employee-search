@@ -1,4 +1,4 @@
-<div class="container">
+{{-- <div class="container">
     <!-- The whole future lies in uncertainty: live immediately. - Seneca -->
     {{ $date }}
 
@@ -15,5 +15,5 @@
                 </details>
             @endforeach
         </details>
-    @endforeach
+    @endforeach --}}
 </div>
