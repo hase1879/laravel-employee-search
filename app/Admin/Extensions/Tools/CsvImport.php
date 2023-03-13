@@ -15,8 +15,8 @@
              var select = document.getElementById('files');
              document.getElementById("files").click();
              select.addEventListener('change',function() {
-                 var formdata = new FormData();
-                 formdata.append( "file", $("input[name='product']").prop("files")[0] );
+                 var fd = new FormData();
+                 fd.append( "file", $("input[name='seet']").prop("files")[0] );
                  $.ajaxSetup({
                      headers: {
                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -24,13 +24,13 @@
                  });
                  $.ajax({
                      type : "POST",
-                     url : "products/import",
-                     data : formdata,
+                     url : "/admin/users/import",
+                     data : fd,
                      processData : false,
                      contentType : false,
                      success: function (response) {
                          $.pjax.reload("#pjax-container");
-                         toastr.success('CSVのアップロードが成功しました');
+                         toastr.success('Upload Successful');
                      }
                  });
              });

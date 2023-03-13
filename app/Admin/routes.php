@@ -13,6 +13,6 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('seets', SeatController::class);
-    $router->post('seets/import', [SeattController::class, 'csvImport']);
+    $router->post('seets/import', [SeatController::class, 'csvImport']);
 
 });

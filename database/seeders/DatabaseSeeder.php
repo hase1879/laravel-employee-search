@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             SeetsTableSeeder::class,
             SitdownsTableSeeder::class,
             EmployeesTableSeeder::class,
+            PrefTableSeeder::class,
         ]);
     }
 }

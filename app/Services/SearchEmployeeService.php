@@ -7,6 +7,7 @@ use App\Models\Employee;
 
 class SearchEmployeeService {
 
+    // 社員検索機能
     public function search($keyword){
 
         if(is_null($keyword)){

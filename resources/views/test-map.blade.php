@@ -6,11 +6,12 @@
 
             <h1>Map</h1>
 
+
             <div class="map">
-                {{--
-                <div class="box" style="width: 118px; height: 121px;top: 226px; left: 391px;"></div>
-                <div class="box" style="width: 118px; height: 69px; top: 215px; left: 694px;"></div>
-                --}}
+
+                {{-- <div class="box" style="width: 200px; height: 121px;top: 226px; left: 391px;"></div>
+                <div class="box" style="width: 118px; height: 69px; top: 215px; left: 694px;"></div> --}}
+
                 @foreach($box_list as $box)
                 <div class="box" style="{{ $box->toStyle() }}" onclick="onClickBox('{{ $box->label }}');">{{ $box->label }}</div>
                 @endforeach
@@ -28,7 +29,7 @@
     background-color: red;
     width: 1320px;
     height: 500px;
-    background-image: url("{{ asset('img/map.png') }}");
+    background-image: url("{{ asset('img/test_zaseki.png') }}");
     background-position: 50% 50%;
     background-size: cover;
     position: relative;
@@ -43,7 +44,7 @@
     position: absolute;
 }
 .box2 {
-    background-color: white !important;
+    /* background-color: white !important; */
     border:solid 2px red;
 }
 </style>

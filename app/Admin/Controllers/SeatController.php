@@ -78,6 +78,8 @@ class SeatController extends AdminController
 
         $form->text('seetnumber', __('Seetnumber'));
 
+
+
         return $form;
     }
 
@@ -98,8 +100,8 @@ class SeatController extends AdminController
         $lexer->parse($file, $interpreter);
         foreach ($rows as $key => $value) {
 
-            if (count($value) == 7) {
-                Product::create([
+            if (count($value) == 1) {
+                Seet::create([
                     'seetnumber' => $value[0],
 
                 ]);

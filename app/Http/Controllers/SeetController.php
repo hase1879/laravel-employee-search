@@ -23,14 +23,14 @@ class SeetController extends Controller
         $service = new SearchEmployeeService();
         $user_results = $service->search($request->keyword);
 
-
         // // // データのツリー化
         // $employees = Employee::with('user')->get();
         // $service = new TreeDataEmployeeService();
         // $tree = $service->treedata($employees);
 
 
-        $keyword = $request->keyword;
+        $sishaName_keyword = $request->sishaName_keyword;
+        $bushoName_keyword = $request->bushoName_keyword;
 
         $employees = Employee::all();
 
@@ -39,19 +39,30 @@ class SeetController extends Controller
             $sishaName = $employee->所属支社;
             $bushoName = $employee->所属部署;
 
-            if($keyword && strpos($employee->user->name, $keyword) === false){
+            if($sishaName_keyword && strpos($sishaName, $sishaName_keyword) === false){
                 continue;
             }
 
+            if($bushoName_keyword && strpos($bushoName, $bushoName_keyword) === false){
+                continue;
+            }
+
+            // 変数をifで条件付けしてそれぞれ作成
             if(!isset($tree[$sishaName]))$tree[$sishaName] = [];
             if(!isset($tree[$sishaName][$bushoName]))$tree[$sishaName][$bushoName] = [];
             $tree[$sishaName][$bushoName][] = $employee;
         }
 
+        $shishaNames = collect($tree)->pluck('shishaName');
+        // dd($tree[$sishaName]);
+
+
+        // DTO版
         $branches = [];
         foreach($employees as $employee){
             $sishaName = $employee->所属支社;
 
+            // クラスの宣言
             if(!isset($branches[$sishaName])){
                 $branches[$sishaName] = new Tree_Branch($sishaName);
             }
@@ -63,7 +74,17 @@ class SeetController extends Controller
         $seatservice = new SeatService();
         $sitdowns = Sitdown::with("user")->get()->groupBy("seet_id");
 
-        return view('seets.index',compact('seats', 'sitdowns', 'user_results', 'employees', 'tree', 'keyword' /*'branches'*/));
+
+        // 座席マップ
+        $box_list = [];
+        $seats = Seet::with('sitdown')->get();
+
+        $box_list[] = new MapBox($seats[0]->seetnumber , $seats[0]->sitdown->width, $seats[0]->sitdown->height, $seats[0]->sitdown->top, $seats[0]->sitdown->left, $seats[0]->sitdown->status, $seats[0]->id);
+        $box_list[] = new MapBox($seats[1]->seetnumber , $seats[1]->sitdown->width, $seats[1]->sitdown->height, $seats[1]->sitdown->top, $seats[1]->sitdown->left, $seats[1]->sitdown->status, $seats[1]->id);
+        $box_list[] = new MapBox($seats[2]->seetnumber , $seats[2]->sitdown->width, $seats[2]->sitdown->height, $seats[2]->sitdown->top, $seats[2]->sitdown->left, $seats[2]->sitdown->status, $seats[2]->id);
+        $box_list[] = new MapBox($seats[3]->seetnumber , $seats[3]->sitdown->width, $seats[3]->sitdown->height, $seats[3]->sitdown->top, $seats[3]->sitdown->left, $seats[3]->sitdown->status, $seats[3]->id);
+
+        return view('seets.index',compact('seats', 'sitdowns', 'user_results', 'employees', 'tree', 'box_list', /*'branches'*/));
     }
 
     public function edit($id)
@@ -92,8 +113,10 @@ class SeetController extends Controller
 
         return redirect()->route('seets.index');
     }
+
 }
 
+// 支社名
 class Tree_Branch {
 
     public $name;
@@ -104,6 +127,7 @@ class Tree_Branch {
     }
 
     function getGroup($bushoName){
+        // groups[$bushoName]がなければ初期化
         if(!isset($this->groups[$bushoName])){
             $group = new Tree_Group();
             $group->name = $bushoName;
@@ -119,7 +143,7 @@ class Tree_Branch {
     }
 }
 
-
+// 部署名　foreach内のemployeeを使用
 class Tree_Group {
 
     public $name;
@@ -127,6 +151,27 @@ class Tree_Group {
 
     function addEmployee($employee){
         $this->employees[] = $employee;
+    }
+
+}
+
+// 座席マップ_CSS表記に変換
+class MapBox {
+
+    function __construct(
+        public $label,
+        public $width,
+        public $height,
+        public $top,
+        public $left,
+        public $status,
+        public $seet_id,
+    ){
+
+    }
+
+    function toStyle(){
+        return "width: {$this->width}px; height: {$this->height}px; top: {$this->top}px; left: {$this->left}px; ";
     }
 
 }
