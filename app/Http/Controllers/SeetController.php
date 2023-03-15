@@ -12,6 +12,7 @@ use App\Services\SearchEmployeeService;
 use App\Services\TreeDataEmployeeService;
 use Illuminate\Support\Facades\DB;
 use App\Services\SeatService;
+use App\Services\MapBoxService;
 
 class SeetController extends Controller
 {
@@ -27,7 +28,6 @@ class SeetController extends Controller
         // $employees = Employee::with('user')->get();
         // $service = new TreeDataEmployeeService();
         // $tree = $service->treedata($employees);
-
 
         $sishaName_keyword = $request->sishaName_keyword;
         $bushoName_keyword = $request->bushoName_keyword;
@@ -75,14 +75,27 @@ class SeetController extends Controller
         $sitdowns = Sitdown::with("user")->get()->groupBy("seet_id");
 
 
-        // 座席マップ
+        // 座席アイコンを作成
         $box_list = [];
         $seats = Seet::with('sitdown')->get();
 
-        $box_list[] = new MapBox($seats[0]->seetnumber , $seats[0]->sitdown->width, $seats[0]->sitdown->height, $seats[0]->sitdown->top, $seats[0]->sitdown->left, $seats[0]->sitdown->status, $seats[0]->id);
-        $box_list[] = new MapBox($seats[1]->seetnumber , $seats[1]->sitdown->width, $seats[1]->sitdown->height, $seats[1]->sitdown->top, $seats[1]->sitdown->left, $seats[1]->sitdown->status, $seats[1]->id);
-        $box_list[] = new MapBox($seats[2]->seetnumber , $seats[2]->sitdown->width, $seats[2]->sitdown->height, $seats[2]->sitdown->top, $seats[2]->sitdown->left, $seats[2]->sitdown->status, $seats[2]->id);
-        $box_list[] = new MapBox($seats[3]->seetnumber , $seats[3]->sitdown->width, $seats[3]->sitdown->height, $seats[3]->sitdown->top, $seats[3]->sitdown->left, $seats[3]->sitdown->status, $seats[3]->id);
+        foreach($seats as $seat){
+            $box_list[] = new MapBoxService(
+                $seat->seetnumber,
+                $seat->sitdown->user->name,
+                $seat->width,
+                $seat->height,
+                $seat->top,
+                $seat->left,
+                $seat->sitdown->status,
+                $seat->id
+            );
+        }
+
+        // $box_list[] = new MapBox($seats[0]->seetnumber , $seats[0]->sitdown->width, $seats[0]->sitdown->height, $seats[0]->sitdown->top, $seats[0]->sitdown->left, $seats[0]->sitdown->status, $seats[0]->id);
+        // $box_list[] = new MapBox($seats[1]->seetnumber , $seats[1]->sitdown->width, $seats[1]->sitdown->height, $seats[1]->sitdown->top, $seats[1]->sitdown->left, $seats[1]->sitdown->status, $seats[1]->id);
+        // $box_list[] = new MapBox($seats[2]->seetnumber , $seats[2]->sitdown->width, $seats[2]->sitdown->height, $seats[2]->sitdown->top, $seats[2]->sitdown->left, $seats[2]->sitdown->status, $seats[2]->id);
+        // $box_list[] = new MapBox($seats[3]->seetnumber , $seats[3]->sitdown->width, $seats[3]->sitdown->height, $seats[3]->sitdown->top, $seats[3]->sitdown->left, $seats[3]->sitdown->status, $seats[3]->id);
 
         return view('seets.index',compact('seats', 'sitdowns', 'user_results', 'employees', 'tree', 'box_list', /*'branches'*/));
     }
@@ -155,23 +168,3 @@ class Tree_Group {
 
 }
 
-// 座席マップ_CSS表記に変換
-class MapBox {
-
-    function __construct(
-        public $label,
-        public $width,
-        public $height,
-        public $top,
-        public $left,
-        public $status,
-        public $seet_id,
-    ){
-
-    }
-
-    function toStyle(){
-        return "width: {$this->width}px; height: {$this->height}px; top: {$this->top}px; left: {$this->left}px; ";
-    }
-
-}

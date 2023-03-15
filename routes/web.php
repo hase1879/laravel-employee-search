@@ -6,6 +6,7 @@ use App\Http\Controllers\SitdownController;
 use App\Http\Controllers\SeetController;
 use App\Http\Controllers\TestEmployeeCsvController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\TestPagenationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,9 @@ Route::get('/seets/seat-chart', function () {
 
 // 【テスト】EmpoyeeDataListの作成
 Route::get('/seets/employee', [TestEmployeeCsvController::class, 'testEmployeeDataList'])/*->middleware('auth')*/;
+// 【テスト】test-pagenation
+Route::get('/pagenation', [TestPagenationController::class, 'testPagenation'])/*->middleware('auth')*/;
+
 
 // 社員一覧ページ
 Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index')/*->middleware('auth')*/;

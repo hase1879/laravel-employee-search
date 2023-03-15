@@ -25,10 +25,6 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->integer('status');
-            $table->integer('width')->nullable();
-            $table->integer('height')->nullable();
-            $table->integer('top')->nullable();
-            $table->integer('left')->nullable();
 
             $table->timestamps();
         });

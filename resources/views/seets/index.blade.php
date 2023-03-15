@@ -8,43 +8,8 @@
         <h1>座席表</h1>
         <div class="col-9">
 
-            <div id="js-map" class="map">
+            <div id="js-map" class="map"></div>
 
-                {{-- seederとコントローラーへ移動させること --}}
-                <div class="four_desk"  style="width: 180px; height: 180px; top: 50px; left: 175px;">
-                    <img src="{{ asset('img/four_desk_bottom_left.png') }}" class="top"  style="width: 38%; height: auto; top: 92px; left: 10px;">
-                    <img src="{{ asset('img/four_desk_bottom_right.png') }}" class="top"  style="width: 38%; height: auto; top: 111px; left: 90px;">
-                    <img src="{{ asset('img/four_desk_top_left.png') }}" class="top"  style="width: 38%; height: auto; top: 10px; left: 19px;">
-                    <img src="{{ asset('img/four_desk_top_right.png') }}" class="top"  style="width: 38%; height: auto; top: 25px; left: 107px;">
-                </div>
-                <div class="four_desk"  style="width: 180px; height: 180px; top: 50px; left: 240px;">
-                    <img src="{{ asset('img/four_desk_bottom_left.png') }}" class="top"  style="width: 38%; height: auto; top: 92px; left: 10px;">
-                    <img src="{{ asset('img/four_desk_bottom_right.png') }}" class="top"  style="width: 38%; height: auto; top: 111px; left: 90px;">
-                    <img src="{{ asset('img/four_desk_top_left.png') }}" class="top"  style="width: 38%; height: auto; top: 10px; left: 19px;">
-                    <img src="{{ asset('img/four_desk_top_right.png') }}" class="top"  style="width: 38%; height: auto; top: 25px; left: 107px;">
-                </div>
-                <div class="four_desk"  style="width: 180px; height: 180px; top: 50px; left: 305px;">
-                    <img src="{{ asset('img/four_desk_bottom_left.png') }}" class="top"  style="width: 38%; height: auto; top: 92px; left: 10px;">
-                    <img src="{{ asset('img/four_desk_bottom_right.png') }}" class="top"  style="width: 38%; height: auto; top: 111px; left: 90px;">
-                    <img src="{{ asset('img/four_desk_top_left.png') }}" class="top"  style="width: 38%; height: auto; top: 10px; left: 19px;">
-                    <img src="{{ asset('img/four_desk_top_right.png') }}" class="top"  style="width: 38%; height: auto; top: 25px; left: 107px;">
-                </div>
-
-                <div class="two_desk"  style="width: 110px; height: 164px; top: 270px; left: -190px;">
-                    <img src="{{ asset('img/two_desk_top.png') }}" class="top"  style="width: 86%; height: auto; top: 10px; left: 9px;">
-                    <img src="{{ asset('img/two_desk_bottom.png') }}" class="top"  style="width: 86%; height: auto; top: 95px; left: 3px;">
-                </div>
-
-                <div class="two_desk"  style="width: 110px; height: 164px; top: 270px; left: -135px;">
-                    <img src="{{ asset('img/two_desk_top.png') }}" class="top"  style="width: 86%; height: auto; top: 10px; left: 9px;">
-                    <img src="{{ asset('img/two_desk_bottom.png') }}" class="top"  style="width: 86%; height: auto; top: 95px; left: 3px;">
-                </div>
-
-                <div class="two_desk"  style="width: 110px; height: 164px; top: 270px; left: -80px;">
-                    <img src="{{ asset('img/two_desk_top.png') }}" class="top"  style="width: 86%; height: auto; top: 10px; left: 9px;">
-                    <img src="{{ asset('img/two_desk_bottom.png') }}" class="top"  style="width: 86%; height: auto; top: 95px; left: 3px;">
-                </div>
-            </div>
         </div>
 
         <div class="col-3">
@@ -99,9 +64,6 @@
                             @endforeach
                         @endforeach
                 </table>
-                @for ($i = 0; $i < 100; $i++)
-                    スクロールバー用テスト<br />
-                @endfor
             </div>
         </div>
     </div>
@@ -112,7 +74,7 @@
 <style type="text/css">
 /* フロア全体の画像 */
 .map {
-background-color: red;
+background-color: rgb(0, 0, 0);
 width: 922px;
 height: 706px;
 background-image: url("{{ asset('img/zaseki_map.png') }}");
@@ -132,42 +94,16 @@ justify-content: center;
 position: absolute;
 }
 
-/* 座席４つの画像 */
-.four_desk {
-/* background-color: rgba(4, 0, 255, 0.548); */
-background-image: url("{{ asset('img/four_desk.png') }}");
-background-size: cover;
-display:inline-block;
-position: relative;
-}
-
-.top {
-/* background-color: rgba(4, 0, 255, 0.548); */
-background-position: center;
-background-size: contain;
-background-repeat:  no-repeat;
-position: absolute;
-}
-
-.two_desk {
-/* background-color: rgba(255, 0, 102, 0.548); */
-background-image: url("{{ asset('img/two_desk.png') }}");
-background-size: contain;
-background-repeat:  no-repeat;
-display:inline-block;
-position: relative;
-}
-
 .sidebar_fixed{
-    position: sticky;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    display: block;
-    overflow-x: hidden;
-    overflow-y: auto;
+position: sticky;
+top: 0;
+left: 0;
+width:100%;
+height:708px;
+display: block;
+overflow-x: hidden;
+overflow-y: auto;
 }
-
 
 </style>
 
@@ -176,29 +112,29 @@ position: relative;
 const box_list = @json($box_list);
 
 for(let box of box_list){
-const $div = $("<div></div>").addClass("box").addClass("box2");
-$div.css("width", box.width + "px");
-$div.css("height", box.height + "px");
-$div.css("top", box.top + "px");
-$div.css("left", box.left + "px");
-if(box.status == "1") {
-    $div.css('background-color','rgba(9, 255, 0, 0.461)');
-} else if(box.status == "2") {
-    $div.css('background-color','rgba(225, 255, 0, 0.461)');
-} else if(box.status == "3") {
-    $div.css('background-color','rgba(174, 0, 255, 0.461)');
-} else {
-    $div.css('background-color','rgba(255, 13, 0, 0.461)');
-}
-
-$div.html(box.label);
-$div.on("click", () => {
-    if(confirm('「' + box.label + '」の着席状況を更新しますか？')) {
-
-        window.location.href =  "{{ route('seets.index') }}" + "/" + box.seet_id +"/edit"
+    const $div = $("<div></div>").addClass("box").addClass("box2");
+    $div.css("width", box.width + "px");
+    $div.css("height", box.height + "px");
+    $div.css("top", box.top + "px");
+    $div.css("left", box.left + "px");
+    if(box.status == "1") {
+        $div.css('background-color','rgba(9, 255, 0, 0.461)');
+    } else if(box.status == "2") {
+        $div.css('background-color','rgba(225, 255, 0, 0.461)');
+    } else if(box.status == "3") {
+        $div.css('background-color','rgba(174, 0, 255, 0.461)');
+    } else {
+        $div.css('background-color','rgba(255, 13, 0, 0.461)');
     }
-});
-$(".four_desk").append($div);
+
+    $div.html(box.label+"<br>"+box.seat_user);
+    $div.on("click", () => {
+        if(confirm('「' + box.label + '」の着席状況を更新しますか？')) {
+
+            window.location.href =  "{{ route('seets.index') }}" + "/" + box.seet_id +"/edit"
+        }
+    });
+    $("#js-map").append($div);
 }
 console.log(box_list);
 
@@ -207,6 +143,11 @@ console.log(box_list);
 
 // }
 // }
+
+
+
+
+
 
 </script>
 

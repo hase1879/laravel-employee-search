@@ -1,13 +1,42 @@
 
 
 {{-- 検索バー --}}
-<form action="{{ route('employees.index') }}" method="get" class="serch-form">
+{{-- <form action="{{ route('employees.index') }}" method="get" class="serch-form">
     <input type="text" placeholder="氏名を検索" name="keyword">
     <input type="submit" value="検索">
-</form>
+</form> --}}
+
+@foreach ($major_category as $shisha)
+{{ $shisha }}
+
+@foreach ($category as $busho)
+{{ $busho }}
+
+@endforeach
+@endforeach
+
+{{-- @foreach ($tree as $shishaNames)
+    @foreach($shishaNames as $bushoNames)
+        @foreach($bushoNames as $employee)
+        <tr>
+            <td>{{ $employee->user->name }}</td>
+            <td>
+                @if(isset( $employee->user->sitdown->seet->seetnumber ))
+                    <a href="{{ route('seets.edit', $employee->user->sitdown->seet->id) }}">{{ $employee->user->sitdown->seet->seetnumber }}</a>
+                @else
+                    離席中
+                @endif
+            </td>
+            <td>
+                {{$seatnumber = isset( $employee->user->sitdown->status ) ? $employee->user->sitdown->status : "―"}}
+            </td>
+        </tr>
+        @endforeach
+    @endforeach
+@endforeach --}}
 
 {{-- 支社-部署-社員の一覧表示 --}}
-@if(isset($branches))
+{{-- @if(isset($branches))
 @foreach ($branches as $branch)
     <details>
         <summary>{{ $branch->name }}</summary>
@@ -23,4 +52,4 @@
         @endforeach
     </details>
 @endforeach
-@endif
+@endif --}}

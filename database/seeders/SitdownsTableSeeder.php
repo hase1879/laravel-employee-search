@@ -16,44 +16,89 @@ class SitdownsTableSeeder extends Seeder
      */
     public function run()
     {
+
         Sitdown::create([
             'user_id' => 1,
             'seet_id' => 1,
             'status' => 1,
-            'width' => 85,
-            'height' => 83,
-            'top' => 5,
-            'left' => 3,
+
         ]);
 
         Sitdown::create([
             'user_id' => 2,
             'seet_id' => 2,
             'status' => 2,
-            'width' => 85,
-            'height' => 83,
-            'top' => 5,
-            'left' => 93,
+
         ]);
 
         Sitdown::create([
             'user_id' => 3,
             'seet_id' => 3,
             'status' => 2,
-            'width' => 85,
-            'height' => 83,
-            'top' => 92,
-            'left' => 3,
+
         ]);
 
         Sitdown::create([
             'user_id' => 4,
             'seet_id' => 4,
             'status' => 3,
-            'width' => 85,
-            'height' => 83,
-            'top' => 92,
-            'left' => 93,
+
+        ]);
+
+        Sitdown::create([
+            'user_id' => 5,
+            'seet_id' => 5,
+            'status' => 1,
+
+        ]);
+
+        Sitdown::create([
+            'user_id' => 6,
+            'seet_id' => 6,
+            'status' => 2,
+
+        ]);
+
+        Sitdown::create([
+            'user_id' => 7,
+            'seet_id' => 7,
+            'status' => 2,
+
+        ]);
+
+        Sitdown::create([
+            'user_id' => 8,
+            'seet_id' => 8,
+            'status' => 3,
+
+        ]);
+
+        Sitdown::create([
+            'user_id' => 9,
+            'seet_id' => 9,
+            'status' => 1,
+
+        ]);
+
+        Sitdown::create([
+            'user_id' => 10,
+            'seet_id' => 10,
+            'status' => 2,
+
+        ]);
+
+        Sitdown::create([
+            'user_id' => 11,
+            'seet_id' => 11,
+            'status' => 2,
+
+        ]);
+
+        Sitdown::create([
+            'user_id' => 12,
+            'seet_id' => 12,
+            'status' => 3,
+
         ]);
     }
 }

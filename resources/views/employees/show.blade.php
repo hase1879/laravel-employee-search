@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
 
 <div class="container-fluid">
+    {{ Breadcrumbs::render('employees.show', $employee->id) }}
+
     <div class="row">
         <div class="col-2">
             <div class=profile-img></div>
