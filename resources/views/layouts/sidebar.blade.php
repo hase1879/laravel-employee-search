@@ -7,12 +7,14 @@
 </form> --}}
 
 @foreach ($major_category as $shisha)
-{{ $shisha }}
-
-@foreach ($category as $busho)
-{{ $busho }}
-
-@endforeach
+<details>
+    <summary>{{ $shisha }}</summary>
+    <ul>
+    @foreach ($category as $busho)
+        <li style="margin-left:15px">{{ $busho }}</li>
+    @endforeach
+    </ul>
+</details>
 @endforeach
 
 {{-- @foreach ($tree as $shishaNames)
