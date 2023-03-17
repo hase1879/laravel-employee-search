@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\User;
+use App\Models\Dept;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Services\TreeGroupService;
@@ -18,17 +19,17 @@ class EmployeeController extends Controller
     {
 
         // 社員名_検索キーワード
-        $sishaName_keyword = $request->sishaName_keyword;
-        $bushoName_keyword = $request->bushoName_keyword;
+        // $sishaName_keyword = $request->$first_dept;
+        // dd($sishaName_keyword);
+
 
         // 社員一覧表用データの取得
         $employees = Employee::with('user')->get();
         $service = new EmployeeListService();
         $employee_list = $service->employeeList($employees);
 
-        // カテゴリー用にデータ成形
-        $major_category = collect($employees)->unique('所属支社')->pluck('所属支社');
-        $category = collect($employees)->unique('所属部署')->pluck('所属部署');
+        // カテゴリー用にデータ取得
+        $depts = Dept::all()->groupBy('first_dept');
 
 
         // 支社-部署-社員データを木構造に整える
@@ -59,7 +60,7 @@ class EmployeeController extends Controller
         //     $branches[$sishaName]->addEmployee($employee);
         // }
 
-        return view('employees.index', compact('employee_list', 'major_category', 'category'));
+        return view('employees.index', compact('employee_list', 'depts'));
     }
 
     public function show($id){

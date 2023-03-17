@@ -54,8 +54,6 @@ Route::get('/pagenation', [TestPagenationController::class, 'testPagenation'])/*
 
 // 社員一覧ページ
 Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index')/*->middleware('auth')*/;
+
 // 社員詳細ページ
 Route::get('/employees/{id}', [EmployeeController::class, 'show'])->name('employees.show')/*->middleware('auth')*/;
-
-// test-github
-Route::get('/github', [TestGitHubController::class, 'testGitHub'])/*->middleware('auth')*/;

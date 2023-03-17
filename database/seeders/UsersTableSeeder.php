@@ -14,7 +14,7 @@ use Goodby\CSV\Import\Standard\LexerConfig;
 class UsersTableSeeder extends Seeder
 {
         //appからの相対パス(CSVデータ)
-        const CSV_FILENAME = '/../database/seeds/users_dummy.csv';
+        const CSV_FILENAME = '/../database/seeders/users_dummy.csv';
 
         /**
          * Run the database seeds.
@@ -36,17 +36,19 @@ class UsersTableSeeder extends Seeder
                 // 登録処理
                 $user = User::create([
                         'profile_picture' => $row[0],
-                        'name' => $row[1],
-                        'furigana' => $row[2],
-                        'age' => $row[3],
-                        'date_of_Birth' => $row[4],
-                        'join_date' => $row[5],
-                        'gender' => $row[6],
-                        'email' => $row[7],
-                        'phone_number' => $row[8],
-                        'mobile_phone_number' => $row[9],
-                        'zip_code' => $row[10],
-                        'present_address' => $row[11],
+                        'user_number' => $row[1],
+                        'name' => $row[2],
+                        'furigana' => $row[3],
+                        'age' => $row[4],
+                        'date_of_Birth' => $row[5],
+                        'join_date' => $row[6],
+                        'gender' => $row[7],
+                        'email' => $row[8],
+                        'phone_number' => $row[9],
+                        'mobile_phone_number' => $row[10],
+                        'zip_code' => $row[11],
+                        'present_address' => $row[12],
+                        'id' => $row[14],
 
                    ]);
             });

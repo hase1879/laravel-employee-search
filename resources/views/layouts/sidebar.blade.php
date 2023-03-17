@@ -6,16 +6,19 @@
     <input type="submit" value="検索">
 </form> --}}
 
-@foreach ($major_category as $shisha)
+
+@foreach ($dept_group as $first_dept => $depts)
 <details>
-    <summary>{{ $shisha }}</summary>
+    <summary><a href="{{ route('employees.index', $first_dept) }}">{{ $first_dept }}</a></summary>
     <ul>
-    @foreach ($category as $busho)
-        <li style="margin-left:15px">{{ $busho }}</li>
+    @foreach ($depts as $dept)
+        <li style="margin-left:10px"><a href="{{ route('employees.index', $dept->second_dept) }}">{{ $dept->second_dept }}</a></li>
     @endforeach
     </ul>
 </details>
 @endforeach
+
+
 
 {{-- @foreach ($tree as $shishaNames)
     @foreach($shishaNames as $bushoNames)

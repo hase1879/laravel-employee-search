@@ -26,8 +26,9 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             SeetsTableSeeder::class,
             SitdownsTableSeeder::class,
+
+            DeptsTableSeeder::class,
             EmployeesTableSeeder::class,
-            PrefTableSeeder::class,
         ]);
     }
 }
