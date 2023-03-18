@@ -13,6 +13,7 @@ use App\Services\TreeDataEmployeeService;
 use Illuminate\Support\Facades\DB;
 use App\Services\SeatService;
 use App\Services\MapBoxService;
+use Exception;
 
 class SeetController extends Controller
 {
@@ -82,20 +83,15 @@ class SeetController extends Controller
         foreach($seats as $seat){
             $box_list[] = new MapBoxService(
                 $seat->seetnumber,
-                $seat->sitdown->user->name,
+                $user_name = isset($seat->sitdown->user->name) ? $seat->sitdown->user->name : '空席',
                 $seat->width,
                 $seat->height,
                 $seat->top,
                 $seat->left,
-                $seat->sitdown->status,
+                $seat_status = isset($seat->sitdown->status) ? $seat->sitdown->status : 'null',
                 $seat->id
             );
         }
-
-        // $box_list[] = new MapBox($seats[0]->seetnumber , $seats[0]->sitdown->width, $seats[0]->sitdown->height, $seats[0]->sitdown->top, $seats[0]->sitdown->left, $seats[0]->sitdown->status, $seats[0]->id);
-        // $box_list[] = new MapBox($seats[1]->seetnumber , $seats[1]->sitdown->width, $seats[1]->sitdown->height, $seats[1]->sitdown->top, $seats[1]->sitdown->left, $seats[1]->sitdown->status, $seats[1]->id);
-        // $box_list[] = new MapBox($seats[2]->seetnumber , $seats[2]->sitdown->width, $seats[2]->sitdown->height, $seats[2]->sitdown->top, $seats[2]->sitdown->left, $seats[2]->sitdown->status, $seats[2]->id);
-        // $box_list[] = new MapBox($seats[3]->seetnumber , $seats[3]->sitdown->width, $seats[3]->sitdown->height, $seats[3]->sitdown->top, $seats[3]->sitdown->left, $seats[3]->sitdown->status, $seats[3]->id);
 
         return view('seets.index',compact('seats', 'sitdowns', 'user_results', 'employees', 'tree', 'box_list', /*'branches'*/));
     }
@@ -115,7 +111,11 @@ class SeetController extends Controller
         $status_number = $request->input('status_number');
 
         if ($status_number == 1){
+            try{
             $service->着席($user, $seat);
+            }catch(Exception $e){
+                redirect()->route('seets.index')->with(['message' => $e->getMessage(), 'delete_seat_id' => $seat->id]);
+            }
         }elseif ($status_number == 2){
             $service->会議中に変更($user, $seat);
         }elseif ($status_number == 3){
@@ -124,7 +124,21 @@ class SeetController extends Controller
             $service->離席($user, $seat);
         }
 
+
+
+        // try-catchでエラーを全てステータス更新ページに遷移
         return redirect()->route('seets.index');
+    }
+
+    public function update_chakuseki($id) {
+        $seat = Seet::find($id);
+        $seat->sitdown->delete();
+        $user = Auth::user();
+
+        $service = new SeatService();
+        $service->着席($user, $seat);
+
+        return redirect()->route('seets.index')->with('sitdown_delete_message', '着席情報を更新しました。');
     }
 
 }

@@ -24,18 +24,19 @@
 
     {{-- CSSファイル読み込み --}}
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
+
 </head>
 <body>
     <div id="app">
         @include('layouts.header')
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
 
-        <x-common-footer />
+        {{-- <x-common-footer /> --}}
 
-        @include('layouts.footer')
+        {{-- @include('layouts.footer') --}}
     </div>
 
 

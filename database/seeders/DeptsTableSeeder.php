@@ -45,6 +45,12 @@ class DeptsTableSeeder extends Seeder
             $lexer->parse(app_path() . self::CSV_FILENAME, $interpreter);
 
             $this->command->info('[End] import data.');
+
+            $dept = Dept::create([
+                'dept_number' => 99,
+                'first_dept' => "例外処理デモ",
+                'second_dept' => "例外処理デモ",
+           ]);
         }
 
 

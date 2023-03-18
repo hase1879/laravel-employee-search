@@ -5,8 +5,8 @@ namespace App\Services;
 use App\Models\Seet;
 use App\Models\Sitdown;
 use App\Models\User;
-// // 例外処理用
-// use Exception;
+// 例外処理用
+use Exception;
 
 class SeatService {
 
@@ -25,7 +25,12 @@ class SeatService {
         $着席情報 = Sitdown::where("user_id","=",$user->id)->first();
         if(is_null($着席情報)){
             $着席情報 = new Sitdown();
-            session()->flash('flash_message', '座席を登録しました。');
+        }
+
+        // 例外処理
+        $seat_user = Sitdown::where("seet_id","=",$seat->id)->first();
+        if(isset($seat_user)){
+            throw new Exception("既に座っている人がいますが、着席しますか？");
         }
 
         $着席情報->user_id = $user->id;

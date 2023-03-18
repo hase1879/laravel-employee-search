@@ -1,27 +1,163 @@
-.products-table {
-    width: 100%;
-    margin: 0 auto;
-    word-break: break-all;
-    border-collapse: collapse;
-  }
 
-  .products-table tr {
-    border-bottom: solid 1px #d9d9d9;
-  }
 
-  .products-table tr:first-child {
-    border-bottom: solid 3px #d9d9d9;
-  }
+  /* サイドバー */
 
-  .products-table th,
-  .products-table td {
-    padding: 1px 0.75px 1px 0;
-    text-align: center;
-  }
+  /* 使いたいフォントを導入 */
+  @import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;400&display=swap");
 
-  .products-table th:first-child,
-  .products-table td:first-child {
-    padding: 1px 0.75px;
-    text-align: center;
-  }
+/* 反映されていない */
+* {
+/* 余白消す */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* リストの点を削除 */
+  list-style: none;
+  /* リンク下線削除 */
+  text-decoration: none;
+  /* Googleフォントを使用を宣言 */
+  font-family: "M PLUS 1p", sans-serif;
+}
 
+.sidebar {
+  position: fixed;
+  /* left: 0; */
+  left: -250px; /* checkboxを実装するとき */
+  background: rgb(75, 48, 17);
+  width: 250px;
+  height: 100%;
+  /* サイドバーの動き */
+  transition: all 0.5s;
+  /* トップ下を埋める */
+  margin-top: -24px;
+}
+
+/* ヘッダー */
+.sidebar header {
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
+  line-height: 70px;
+  background: rgb(138, 90, 36);
+  /* 文字を選択できなくなる */
+  user-select: none;
+}
+
+.sidebar ul a {
+    /* 横幅いっぱいに */
+  display: block;
+  /* ％は親要素（.sidebar）に依存 */
+  height: 100%;
+  width: 100%;
+  /* 段落の余白 */
+  line-height: 65px;
+  /* 文字の大きさ */
+  font-size: 20px;
+  color: #fff;
+  /* 余白 */
+  padding-left: 40px;
+  /* 横線、rgbaの第４オクテットが透明度 */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid black;
+  transition: 0.4s;
+}
+
+/* li要素を浮かせる。動きの速さは親タグ(ul)で指定。 */
+ul li:hover a {
+  padding-left: 50px;
+}
+
+/* アイコンと文字間の余白 */
+.sidebar ul a i {
+  margin-right: 16px;
+}
+
+/*
+* ハンバーガーメニュー
+* チェックボックスのアイコンは削除
+*/
+#check {
+  display: none;
+}
+
+label #btn,
+label #cancel {
+    /* 絶対配置 */
+  position: absolute;
+  cursor: pointer;
+  background: #b66f2d;
+  /* 丸みを付ける */
+  border-radius: 3px;
+}
+
+label #btn {
+  left: 40px;
+  top: 72px;
+  font-size: 25px;
+  color: #fff;
+  padding: 6px 12px;
+  transition: all 0.5s;
+}
+
+label #cancel {
+    /* ヘッダーの上に表示 */
+  z-index: 10;
+  /* left: 195px; 見やすいように最初はこれ*/
+  left: -195px;
+  top: 72px;
+  font-size: 30px;
+  color: #fff;
+  padding: 4px 9px;
+  transition: all 0.5s;
+}
+
+/* :checkedでチェックされたときの動作となる。 */
+#check:checked ~ .sidebar {
+    /* -250pxを0pxに */
+  left: 0;
+}
+
+/* ハンバーガーボタン */
+#check:checked ~ label #btn {
+  left: 250px;
+  /* 透明度 */
+  opacity: 0;
+  /* 透明状態で押されないようにする。また、ヘッダーをnoneにしているので全く気づかれない */
+  pointer-events: none;
+}
+
+/* ×ボタン */
+#check:checked ~ label #cancel {
+  left: 195px;
+}
+
+/* サイドバーの動きに合わせて、移動 */
+#check:checked ~ section {
+  margin-left: 250px;
+}
+
+/* バックグラウンドの画像 */
+section {
+    /* 表示画面一杯に表示 */
+  height: 100vh;
+  /* background: url("./bg.jpg"); */
+  background-size: cover;
+  background-position: center;
+  transition: all 0.5s;
+}
+
+/* 謎の隙間埋めた*/
+ul{
+    padding-left: 0px;
+      /* リストの点を削除 */
+    list-style: none;
+    /* リンク下線削除 */
+    text-decoration: none;
+    /* Googleフォントを使用を宣言 */
+    font-family: "M PLUS 1p", sans-serif;
+}
+
+a {
+    /* リンク下線削除 */
+  text-decoration: none;
+}

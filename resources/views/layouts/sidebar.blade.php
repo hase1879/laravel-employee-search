@@ -1,22 +1,15 @@
-
-
-{{-- 検索バー --}}
-{{-- <form action="{{ route('employees.index') }}" method="get" class="serch-form">
-    <input type="text" placeholder="氏名を検索" name="keyword">
-    <input type="submit" value="検索">
-</form> --}}
-
-
-@foreach ($dept_group as $first_dept => $depts)
-<details>
-    <summary><a href="{{ route('employees.index', $first_dept) }}">{{ $first_dept }}</a></summary>
-    <ul>
-    @foreach ($depts as $dept)
-        <li style="margin-left:10px"><a href="{{ route('employees.index', $dept->second_dept) }}">{{ $dept->second_dept }}</a></li>
+<ul>
+    @foreach ($dept_group as $first_dept => $depts)
+    <details>
+        <summary><a  href="{{ route('employees.index', ['dept_keyword' => $first_dept]) }}">{{ $first_dept }}</a></summary>
+        @foreach ($depts as $dept)
+            <li style="margin-left:30px"><a href="{{ route('employees.index', ['dept_keyword' => $dept->second_dept]) }}">{{ $dept->second_dept }}</a></li>
+        @endforeach
+    </details>
     @endforeach
-    </ul>
-</details>
-@endforeach
+</ul>
+
+
 
 
 

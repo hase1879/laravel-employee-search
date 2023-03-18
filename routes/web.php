@@ -36,6 +36,9 @@ Route::get('/seets/{id}/edit', [SeetController::class, 'edit'])->name('seets.edi
 // Route::get('/seets/{id}', [SeetController::class, 'update'])->name('seets.update')->middleware('auth');
 Route::patch('/seets/{id}', [SeetController::class, 'update_status'])->name('seets.update_status')/*->middleware('auth')*/;
 
+//座席_着席者の入れ替え deleteする為、getメソッドでデータを取得する。
+Route::get('/seets/delete/{id}', [SeetController::class, 'update_chakuseki'])->name('seets.update_chakuseki');
+Route::patch('/seets/delete/{id}', [SeetController::class, 'update_chakuseki'])->name('seets.update_chakuseki');
 
 Route::get('/seets/test', [App\Http\Controllers\SeatTestController::class, 'doTestService'])/*->middleware('auth')*/;
 
@@ -57,3 +60,12 @@ Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.
 
 // 社員詳細ページ
 Route::get('/employees/{id}', [EmployeeController::class, 'show'])->name('employees.show')/*->middleware('auth')*/;
+
+// sidebar学習用
+Route::get('/sidebar', function () {
+    return view('test-sidebar');
+});
+
+Route::get('/test', function () {
+    return view('test');
+});

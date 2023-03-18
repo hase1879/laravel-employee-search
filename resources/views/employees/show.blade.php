@@ -12,7 +12,7 @@
         </div>
         <div class="col-10">
             <ul class="employee-name">
-                <li>社員番号&ensp;:&emsp;12345678</li>
+                <li>社員番号&ensp;:&emsp;{{ $employee->user->user_number }}</li>
                 <br>
                 <li>{{ $employee->user->furigana }}</li>
                 <li  class="fw-bold fs-3">{{ $employee->user->name }}</li>
@@ -28,7 +28,7 @@
             <table>
             <tr>
                 <td  width="85" class="card-text">所属</td>
-                <td  width="300" class="card-text">{{ $employee->所属支社 }}&ensp;{{ $employee->所属部署 }}</td>
+                <td  width="300" class="card-text">{{ $employee->dept->first_dept }}&ensp;{{ $employee->dept->second_dept }}</td>
             </tr>
             <tr>
                 <td  width="85" class="card-text">役職</td>

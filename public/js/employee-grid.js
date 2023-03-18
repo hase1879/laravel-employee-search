@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
           },
           search: true,
           sort: true,
+          fixedHeader: true,
+          height: '700px',
           style: {
               td: {
                   border: '1px solid #ccc',

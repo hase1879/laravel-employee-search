@@ -3,7 +3,7 @@
 namespace App\Services;
 
 
-// 座席マップ_CSS表記に変換
+// 座席マップ用データに成形
 class MapBoxService {
 
 function __construct(

@@ -11,6 +11,7 @@ use App\Services\TreeGroupService;
 use App\Services\TreeBranchService;
 use App\Services\EmployeeInfoService;
 use App\Services\EmployeeListService;
+use Exception;
 
 class EmployeeController extends Controller
 {
@@ -18,15 +19,20 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
 
-        // 社員名_検索キーワード
-        // $sishaName_keyword = $request->$first_dept;
-        // dd($sishaName_keyword);
-
 
         // 社員一覧表用データの取得
         $employees = Employee::with('user')->get();
+
+        $dept_keyword = $request->dept_keyword;
+
         $service = new EmployeeListService();
-        $employee_list = $service->employeeList($employees);
+
+        try{
+            $employee_list = $service->employeeList($employees,$dept_keyword);
+        }catch(Exception $e){
+            return redirect()->route('home')->with('message', $e->getMessage());
+        }
+
 
         // カテゴリー用にデータ取得
         $depts = Dept::all()->groupBy('first_dept');
