@@ -23,7 +23,14 @@
     <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
 
     {{-- CSSファイル読み込み --}}
-    <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
+    {{-- <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" > --}}
+    <style>
+        main {
+            background-color: #F2F2F2;
+            min-width: 100vw;
+            min-height: 100vh;
+        }
+    </style>
 
 </head>
 <body>

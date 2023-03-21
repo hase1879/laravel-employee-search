@@ -69,3 +69,7 @@ Route::get('/sidebar', function () {
 Route::get('/test', function () {
     return view('test');
 });
+
+Route::get('/testtest', function () {
+    return view('testtest');
+});

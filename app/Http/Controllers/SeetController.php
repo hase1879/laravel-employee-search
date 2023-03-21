@@ -8,6 +8,7 @@ use App\Models\Sitdown;
 use App\Models\Seet;
 use App\Models\User;
 use App\Models\Employee;
+use App\Models\Dept;
 use App\Services\SearchEmployeeService;
 use App\Services\TreeDataEmployeeService;
 use Illuminate\Support\Facades\DB;
@@ -21,42 +22,41 @@ class SeetController extends Controller
 
         $seats = Seet::all();
 
+        $depts = Dept::all();
+        $first_depts = Dept::all()->pluck('first_dept')->unique();
+
         // 検索機能
         $service = new SearchEmployeeService();
         $user_results = $service->search($request->keyword);
+
+
+
+        $dept_keyword = $request->dept_keyword;
+
+        $employees = Employee::all();
+
+
+        $tree = [];
+        foreach($employees as $employee){
+            $first_dept = $employee->dept->first_dept;
+            $second_dept = $employee->dept->second_dept;
+            $array = [$first_dept, $second_dept];
+
+            // 「$dept_keywordに値がある」かつ「キーワード一致しない」すればスキップ
+            if($dept_keyword && (array_search($dept_keyword, $array)) === false){
+                continue;
+            }
+
+            // 変数をifで条件付けしてそれぞれ作成
+            if(!isset($tree[$first_dept]))$tree[$first_dept] = [];
+            if(!isset($tree[$first_dept][$second_dept]))$tree[$first_dept][$second_dept] = [];
+            $tree[$first_dept][$second_dept][] = $employee;
+        }
 
         // // // データのツリー化
         // $employees = Employee::with('user')->get();
         // $service = new TreeDataEmployeeService();
         // $tree = $service->treedata($employees);
-
-        $sishaName_keyword = $request->sishaName_keyword;
-        $bushoName_keyword = $request->bushoName_keyword;
-
-        $employees = Employee::all();
-
-        $tree = [];
-        foreach($employees as $employee){
-            $sishaName = $employee->所属支社;
-            $bushoName = $employee->所属部署;
-
-            if($sishaName_keyword && strpos($sishaName, $sishaName_keyword) === false){
-                continue;
-            }
-
-            if($bushoName_keyword && strpos($bushoName, $bushoName_keyword) === false){
-                continue;
-            }
-
-            // 変数をifで条件付けしてそれぞれ作成
-            if(!isset($tree[$sishaName]))$tree[$sishaName] = [];
-            if(!isset($tree[$sishaName][$bushoName]))$tree[$sishaName][$bushoName] = [];
-            $tree[$sishaName][$bushoName][] = $employee;
-        }
-
-        $shishaNames = collect($tree)->pluck('shishaName');
-        // dd($tree[$sishaName]);
-
 
         // DTO版
         $branches = [];
@@ -93,7 +93,7 @@ class SeetController extends Controller
             );
         }
 
-        return view('seets.index',compact('seats', 'sitdowns', 'user_results', 'employees', 'tree', 'box_list', /*'branches'*/));
+        return view('seets.index',compact('seats', 'sitdowns', 'user_results', 'employees', 'tree', 'box_list','depts' ,'first_depts'/*'branches'*/));
     }
 
     public function edit($id)
