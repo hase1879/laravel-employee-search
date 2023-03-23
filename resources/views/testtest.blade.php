@@ -104,7 +104,6 @@
   height: 25px;
   background-color: rgba(49, 49, 52, 0.701);
   transition: all .5s;
-
 }
 .menu-trigger.active span {
   background-color: #ffffff85;

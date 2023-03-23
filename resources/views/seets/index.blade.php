@@ -5,61 +5,11 @@
 <div class="container px-0">
     <div class="row g-0">
 
-        {{-- サイドメニュー --}}
-        <div class="col-12 col-lg-3 d-none d-lg-block bg-green">
-            <div class="bg-white">
-                <div class="sidebar_fixed">
-                    <form method="get" action={{ route('seets.index') }} >
-                        @csrf
-                    <p>
-                        <select name="dept_keyword"  class="form-select" aria-label="Default select example">
-                            <option value="人事課" selected>(デモ用)管理本部人事課</option>
-                            @foreach($first_depts as $first_dept)
-                                <option value="{{ $first_dept }}">{{ $first_dept }}</option>
-                            @endforeach
-                            @foreach($depts as $dept)
-                            <option value="{{ $dept->second_dept }}">{{ $dept->first_dept }}{{ $dept->second_dept }}</option>
-                        @endforeach
-                        </select>
-                    </p>
-                    </p>
-                        <input type="submit" value="表示する" class="btn btn-outline-primary float-end">
-                    </p>
-                    </form>
-
-                    <table class="table table-striped">
-                        <tr>
-                            <th>氏名</th>
-                            <th>座席番号</th>
-                            <th>着席状況</th>
-                        </tr>
-                            @foreach ($tree as $first_depts)
-                                @foreach($first_depts as $second_depts)
-                                    @foreach($second_depts as $employee)
-                                    <tr>
-                                        <td>{{ $employee->user->name }}</td>
-                                        <td>
-                                            @if(isset( $employee->user->sitdown->seet->seetnumber ))
-                                                <a href="{{ route('seets.edit', $employee->user->sitdown->seet->id) }}">{{ $employee->user->sitdown->seet->seetnumber }}</a>
-                                            @else
-                                                離席中
-                                            @endif
-                                        </td>
-                                        <td>
-                                            {{$seatnumber = isset( $employee->user->sitdown->status ) ? $employee->user->sitdown->status : "―"}}
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                @endforeach
-                            @endforeach
-                    </table>
-                </div>
-            </div>
-        </div>
+        @include("seets.sidemenu")
 
         {{-- コンテンツ --}}
-        <div class="col-12 col-lg-9 bg-blue p-3">
-            <div class="canvas"\
+        <div class="col-12 col-lg-10 bg-blue p-3">
+            <div class="canvas mt-10">
                 {{-- 例外処理 --}}
                 @if (session('message'))
                 <script>
@@ -82,31 +32,34 @@
                 </div>
                 @endif
                 <h1>座席表</h1>
-                <div id="js-map" class="map"></div>
-
+                {{-- <div id="js-map" class="map"></div> --}}
             </div>
 
-            <div class="canvass">
-                <img src="{{ asset('img/seat_map.png') }}" alt="">
-            </div>
+            <div class="pd-10">
 
-            {{-- <form method="get" action={{ route('seets.index') }} >
-                @csrf
-            <p>
-                <select name="dept_keyword"  class="form-select" aria-label="Default select example">
-                    <option value="人事課" selected>(デモ用)管理本部人事課</option>
-                    @foreach($first_depts as $first_dept)
-                        <option value="{{ $first_dept }}">{{ $first_dept }}</option>
-                    @endforeach
-                    @foreach($depts as $dept)
-                        <option value="{{ $dept->second_dept }}">{{ $dept->first_dept }}{{ $dept->second_dept }}</option>
-                    @endforeach
-                </select>
-            </p>
-            <p>
-                <input type="submit" value="表示する" class="btn btn-outline-primary float-end">
-            </p>
-            </form> --}}
+                {{-- ドロップダウン --}}
+                <form method="get" action={{ route('seets.index') }} >
+                    @csrf
+                    <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                            <select name="dept_keyword"  class="form-select form-select-lg">
+                                @foreach($first_depts as $first_dept)
+                                    <option value="{{ $first_dept }}">{{ $first_dept }}</option>
+                                @endforeach
+
+                                @foreach($depts as $dept)
+                                    <option value="{{ $dept->second_dept }}">{{ $dept->first_dept }}{{ $dept->second_dept }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <input type="submit" value="表示する" class="btn btn-primary float-start">
+                        </div>
+                    </div>
+                </form>
+
+                <div id="js-map"  class="map"></div>
+            </div>
 
 
 
@@ -117,18 +70,29 @@
 
 
 <style type="text/css">
+.inline {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 /* フロア全体の画像 */
 .map {
 background-color: rgb(0, 0, 0);
-width: 922px;
-height: 706px;
-background-image: url("{{ asset('img/zaseki_map.png') }}");
+width: 958px;
+height: 522px;
+border: 25px solid #ffffff;
+border-radius: 40px;
+background-color: white;
+background-image: url("{{ asset('img/seat_map.png') }}");
 background-position: center;
-background-size: cover;
+background-size: contain;
+background-repeat: no-repeat;
 /* z-index: 10; */
 position: relative;
+top: 20px
 }
-
 
 .map .box {
 /* background-color:rgba(255,0,0,0.5); */
@@ -156,15 +120,7 @@ overflow-x: hidden;
 overflow-y: auto;
 }
 
-.canvass{
-    width: 990px;
-    background-color: red;
-    border: 25px solid #ffffff;
-    border-radius: 40px;
-    /* padding: 50px; */
-}
-
-.canvass img{
+/* .map img{
     width: 100%;
     height: auto;
     background-color: rgb(8, 0, 255);
@@ -172,7 +128,8 @@ overflow-y: auto;
     z-index: 50;
     display: block;
     margin: 0;
-}
+    position: relative;
+} */
 
 </style>
 
@@ -181,11 +138,12 @@ overflow-y: auto;
 const box_list = @json($box_list);
 
 for(let box of box_list){
-    const $div = $("<div></div>").addClass("box").addClass("box2");
+    const $div = $("<div></div>").addClass("box");
     $div.css("width", box.width + "px");
     $div.css("height", box.height + "px");
     $div.css("top", box.top + "px");
     $div.css("left", box.left + "px");
+    $div.css("position","absolute")
     if(box.status == "1") {
         $div.css('background-color','rgba(9, 255, 0, 0.461)');
     } else if(box.status == "2") {
