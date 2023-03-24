@@ -3,10 +3,10 @@
     <div class="bg-white">
         <div class="sidebar_fixed  p-3">
             <div>
-                <table class="table table-borderless">
+                <table class="sidemenu table table-borderless "  cellpadding="0">
                     <thead>
                     <tr>
-                        <th colspan="2">社員一覧</th>
+                        <th colspan="2">該当社員一覧</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -16,25 +16,35 @@
                             </tr>
                             @foreach($second_depts as $second_dept=>$employees)
                                 <tr>
-                                    <td colspan="2">{{ $second_dept }}</td>
+                                    <td colspan="2">&thinsp;{{ $second_dept }}</td>
                                 </tr>
                                 @foreach($employees as $employee)
                                     <tr>
-                                        <td class="icon"rowspan="2"><img src="{{ asset('img/dummy.png') }}"></td>
-                                        <td class="h6">
-                                            {{$seatnumber = isset( $employee->user->sitdown->status ) ? $employee->user->sitdown->status : "―"}}
-
+                                        <td class="icon" rowspan="2" style="text-align: center;"><img src="{{ asset('img/employee_blue.png') }}"></td>
+                                        <td class="seat-info"  cellpadding="1">
+                                                {{$seatnumber = isset( $employee->user->sitdown->seet->seetnumber ) ? $employee->user->sitdown->seet->seetnumber : "－"}}
                                             :&nbsp;
 
-                                            @if(isset( $employee->user->sitdown->seet->seetnumber ))
-                                            <a href="{{ route('seets.edit', $employee->user->sitdown->seet->id) }}">{{ $employee->user->sitdown->seet->seetnumber }}</a>
-                                            @else
-                                                離席中
+                                            @if(isset( $employee->user->sitdown->status  ))
+                                                @switch ($employee->user->sitdown->status)
+                                                    @case(1)
+                                                        着席
+                                                        @break
+                                                    @case(2)
+                                                        会議中
+                                                        @break
+                                                    @case(3)
+                                                        会議中
+                                                        @break
+                                                    @default
+                                                        離席
+                                                        @break;
+                                                @endswitch
                                             @endif
                                         </td>
                                         </tr>
-                                        <tr>
-                                        <td class="h5">{{ $employee->user->name }}</td>
+                                    <tr>
+                                        <td class="employee-name"><a href="{{ route('employees.show', $employee->id) }}">{{ $employee->user->name }}</a></td>
                                     </tr>
                                 @endforeach
                             @endforeach
@@ -54,16 +64,37 @@ crossorigin="anonymous"
 />
 
 <style type="text/css">
+
+.sidemenu,.sidemenu td,.sidemenu th{
+    border: none !important;
+    padding: 1px;
+}
+
+.sidemenu td {
+    margin: 15px 0px;
+}
+.icon {
+    vertical-align: middle;
+}
+
 img {
     width: auto;
-    height: 55px;
+    height: 40px;
     background-position: center;
     }
 
+.employee-name a{
+    font-size: 14px;
+    text-decoration: none;
+    color: black;
+    font-weight:bold;
+}
 
-tr {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid black;
-  /* width:400px; */
+.employee-name a:hover {
+    color: #333;
+}
+
+.seat-info{
+    font-size: 13px;
 }
 </style>

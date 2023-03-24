@@ -24,10 +24,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminTablesSeeder::class,
             UsersTableSeeder::class,
-            SeetsTableSeeder::class,
-            SitdownsTableSeeder::class,
-
+            // SeetsTableSeeder::class,
             DeptsTableSeeder::class,
+            SitdownsTableSeeder::class,
             EmployeesTableSeeder::class,
         ]);
     }

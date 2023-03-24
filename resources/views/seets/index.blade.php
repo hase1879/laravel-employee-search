@@ -9,6 +9,7 @@
 
         {{-- コンテンツ --}}
         <div class="col-12 col-lg-10 bg-blue p-3">
+            {{ Breadcrumbs::render('employees.index') }}
             <div class="canvas mt-10">
                 {{-- 例外処理 --}}
                 @if (session('message'))
@@ -31,7 +32,7 @@
                     </div>
                 </div>
                 @endif
-                <h1>座席表</h1>
+                {{-- <h1>座席表</h1> --}}
                 {{-- <div id="js-map" class="map"></div> --}}
             </div>
 
@@ -42,7 +43,7 @@
                     @csrf
                     <div class="row g-3 align-items-center">
                         <div class="col-auto">
-                            <select name="dept_keyword"  class="form-select form-select-lg">
+                            <select name="dept_keyword"  class="form-select form-select-lg ">
                                 @foreach($first_depts as $first_dept)
                                     <option value="{{ $first_dept }}">{{ $first_dept }}</option>
                                 @endforeach
@@ -60,9 +61,6 @@
 
                 <div id="js-map"  class="map"></div>
             </div>
-
-
-
         </div>
     </div>
 </div>
@@ -89,13 +87,12 @@ background-image: url("{{ asset('img/seat_map.png') }}");
 background-position: center;
 background-size: contain;
 background-repeat: no-repeat;
-/* z-index: 10; */
 position: relative;
 top: 20px
 }
 
 .map .box {
-/* background-color:rgba(255,0,0,0.5); */
+font-size: 14px;
 text-align: center;
 display: flex;
 align-items: center;
@@ -119,18 +116,6 @@ display: block;
 overflow-x: hidden;
 overflow-y: auto;
 }
-
-/* .map img{
-    width: 100%;
-    height: auto;
-    background-color: rgb(8, 0, 255);
-    background-position: center;
-    z-index: 50;
-    display: block;
-    margin: 0;
-    position: relative;
-} */
-
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
@@ -164,17 +149,6 @@ for(let box of box_list){
     $("#js-map").append($div);
 }
 console.log(box_list);
-
-// const onClickBox = (label) => {
-// if(confirm('座席「' + label + '」に座りますか？')) {
-
-// }
-// }
-
-
-
-
-
 
 </script>
 

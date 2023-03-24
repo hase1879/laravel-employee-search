@@ -5,44 +5,38 @@
 @section('content')
 <script src="{{ asset('/js/employee-grid.js') }}"></script>
 
-    <div class="container-fluid">
+<div class="container px-0">
+    <div class="row g-0">
+
+        {{-- サイドメニュー --}}
+        @include('layouts.sidebar', ['dept_group' => $depts])
+
+        {{-- コンテンツ --}}
+        <div class="col-12 col-lg-10 bg-blue p-3">
+            <div class="content">
+                {{ Breadcrumbs::render('employees.index') }}
+                <h3>社員一覧</h3>
 
 
-        <div class="row">
-            {{-- サイドバー --}}
-            <div class="col-2">
-                {{-- 部署カテゴリー --}}
-                <div class = "sidebar_fixed">
-                    @include('layouts.sidebar', ['dept_group' => $depts])
-                </div>
-            </div>
+                <div id="test-grid"></div>
+                <div id="sample-table-wrapper"></div>
 
-
-
-            <div class="col-10 ">
-                <div class="content">
-                    {{ Breadcrumbs::render('employees.index') }}
-                    <h3>社員一覧</h3>
-
-
-                    <div id="test-grid"></div>
-                    <div id="sample-table-wrapper"></div>
-
-                    {{-- 社員一覧表の出力（grid.jsを使用） --}}
-                    <table id="sample-table" style="display:none;">
-                        <thead>
-                            <tr><th>氏名</th><th>ふりがな</th><th>所属支社</th><th>所属部署</th><th>メールアドレス</th><th>電話番号</th><th>携帯番号</th><th>着席位置</th><th>着席状況</th></tr>
-                        </thead>
-                        <tbody>
-                            @foreach($employee_list as $employee)
-                            <tr><td><a class="employees-show-link" href="{{ route('employees.show', $employee->id) }}">{{ $employee->name }}</a></td><td>{{ $employee->furigana }}</td><td>{{ $employee->first_dept }}</td><td>{{ $employee->second_dept }}</td><td>{{ $employee->email }}</td><td>{{ $employee->phone_number }}</td><td>{{ $employee->mobile_phone_number }}</td><td>{{ $employee->seatnumber }}</td><td>{{ $employee->status }}</td></tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                {{-- 社員一覧表の出力（grid.jsを使用） --}}
+                <table id="sample-table" style="display:none;">
+                    <thead>
+                        <tr><th>氏名</th><th>ふりがな</th><th>所属支社</th><th>所属部署</th><th>メールアドレス</th><th>電話番号</th><th>携帯番号</th><th>着席位置</th><th>着席状況</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach($employee_list as $employee)
+                        <tr><td><a class="employees-show-link" href="{{ route('employees.show', $employee->id) }}">{{ $employee->name }}</a></td><td>{{ $employee->furigana }}</td><td>{{ $employee->first_dept }}</td><td>{{ $employee->second_dept }}</td><td>{{ $employee->email }}</td><td>{{ $employee->phone_number }}</td><td>{{ $employee->mobile_phone_number }}</td><td>{{ $employee->seatnumber }}</td><td>{{ $employee->status }}</td></tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="modalSample" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalSampleLabel" aria-hidden="true">
@@ -64,7 +58,7 @@
     </div>
 
 <style type="text/css">
-.sidebar_fixed{
+/* .sidebar_fixed{
 position: sticky;
 top: 0;
 left: 0;
@@ -73,18 +67,18 @@ height:100vh;
 padding: 12px;
 box-sizing: border-box;
 /* text-align: center; */
-background-color: rgba(0, 94, 255, 0.174);
+/* background-color: rgba(0, 94, 255, 0.174);
 display: flex;
 overflow-x: hidden;
 overflow-y: auto;
-}
+}  */
 
 /* a {
     color: #fff;
     text-decoration: none;
 } */
 
-.employee_fixed{
+/* .employee_fixed{
 position: sticky;
 top: 0;
 left: 0;
@@ -104,7 +98,7 @@ height:100vh;
 display: block;
 overflow-x: hidden;
 overflow-y: auto;
-}
+} */
 
 </style>
 

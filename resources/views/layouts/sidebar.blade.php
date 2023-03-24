@@ -1,53 +1,70 @@
-<ul>
-    @foreach ($dept_group as $first_dept => $depts)
-    <details>
-        <summary><a  href="{{ route('employees.index', ['dept_keyword' => $first_dept]) }}">{{ $first_dept }}</a></summary>
-        @foreach ($depts as $dept)
-            <li style="margin-left:30px"><a href="{{ route('employees.index', ['dept_keyword' => $dept->second_dept]) }}">{{ $dept->second_dept }}</a></li>
-        @endforeach
-    </details>
-    @endforeach
-</ul>
+{{-- 社員一覧_サイドメニュー--}}
+{{-- サイドメニュー --}}
+<div class="col-12 col-lg-2 d-none d-lg-block bg-green ">
+    <div class="bg-white">
+        <div class="sidebar_fixed  p-3">
+            <div class="employee-sidemenu">
 
-
-
-
-
-{{-- @foreach ($tree as $shishaNames)
-    @foreach($shishaNames as $bushoNames)
-        @foreach($bushoNames as $employee)
-        <tr>
-            <td>{{ $employee->user->name }}</td>
-            <td>
-                @if(isset( $employee->user->sitdown->seet->seetnumber ))
-                    <a href="{{ route('seets.edit', $employee->user->sitdown->seet->id) }}">{{ $employee->user->sitdown->seet->seetnumber }}</a>
-                @else
-                    離席中
-                @endif
-            </td>
-            <td>
-                {{$seatnumber = isset( $employee->user->sitdown->status ) ? $employee->user->sitdown->status : "―"}}
-            </td>
-        </tr>
-        @endforeach
-    @endforeach
-@endforeach --}}
-
-{{-- 支社-部署-社員の一覧表示 --}}
-{{-- @if(isset($branches))
-@foreach ($branches as $branch)
-    <details>
-        <summary>{{ $branch->name }}</summary>
-        @foreach($branch->groups as $group)
-            <details style="margin-left:15px">
-                <summary>{{ $group->name }}</summary>
                 <ul>
-                    @foreach($group->employees as $employee)
-                        <li style="margin-left:15px">{{ $employee->user->name }}</li>
+                    @foreach ($dept_group as $first_dept => $depts)
+                        <details>
+                        <summary class="py-1"><a  href="{{ route('employees.index', ['dept_keyword' => $first_dept]) }}">{{ $first_dept }}</a></summary>
+                        @foreach ($depts as $dept)
+                        <li class="py-1" style="margin-left:30px"><a href="{{ route('employees.index', ['dept_keyword' => $dept->second_dept]) }}">{{ $dept->second_dept }}</a></li>
+                        @endforeach
+                        </details>
                     @endforeach
                 </ul>
-            </details>
-        @endforeach
-    </details>
-@endforeach
-@endif --}}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<link
+rel="stylesheet"
+href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+crossorigin="anonymous"
+/>
+
+<style type="text/css">
+
+.sidebar_fixed{
+position: sticky;
+top: 0;
+left: 0;
+width:100%;
+/* ヘッダー分を下げる */
+height:100vh;
+display: block;
+overflow-x: hidden;
+overflow-y: auto;
+}
+
+.employee-sidemenu{
+    font-size:15px;
+}
+
+.employee-sidemenu a{
+    text-decoration: none;
+    color: black;
+    /* font-weight:bold; */
+}
+
+.employee-sidemenu a:hover {
+    color: #00aeff;
+}
+
+
+.employee-sidemenu ul{
+    padding: 0;
+}
+
+
+</style>
+
+
+
+
+
