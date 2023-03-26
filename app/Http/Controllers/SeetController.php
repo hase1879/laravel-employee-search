@@ -29,21 +29,19 @@ class SeetController extends Controller
         $service = new SearchEmployeeService();
         $user_results = $service->search($request->keyword);
 
+        // dd($request->dept_id_keyword);
 
-
-        $dept_keyword = $request->dept_keyword;
+        // 座席表の初期値は"dept_id=1"
+        $dept_id_keyword = isset($request->dept_id_keyword) ? $request->dept_id_keyword : 1;
 
         $employees = Employee::all();
-
 
         $tree = [];
         foreach($employees as $employee){
             $first_dept = $employee->dept->first_dept;
             $second_dept = $employee->dept->second_dept;
-            $array = [$first_dept, $second_dept];
 
-            // 「$dept_keywordに値がある」かつ「キーワード一致しない」すればスキップ
-            if($dept_keyword && (array_search($dept_keyword, $array)) === false){
+            if (strpos($dept_id_keyword, $employee->dept->id) === false) {
                 continue;
             }
 
@@ -52,6 +50,7 @@ class SeetController extends Controller
             if(!isset($tree[$first_dept][$second_dept]))$tree[$first_dept][$second_dept] = [];
             $tree[$first_dept][$second_dept][] = $employee;
         }
+        // dd($map_image);
 
         // // // データのツリー化
         // $employees = Employee::with('user')->get();
@@ -77,23 +76,44 @@ class SeetController extends Controller
 
 
         // 座席アイコンを作成
-        $box_list = [];
+        // $box_list = [];
         $seats = Seet::with('sitdown')->get();
 
-        foreach($seats as $seat){
-            $box_list[] = new MapBoxService(
-                $seat->seetnumber,
-                $user_name = isset($seat->sitdown->user->name) ? $seat->sitdown->user->name : '空席',
-                $seat->width,
-                $seat->height,
-                $seat->top,
-                $seat->left,
-                $seat_status = isset($seat->sitdown->status) ? $seat->sitdown->status : 'null',
-                $seat->id
-            );
-        }
+        // $test_keyword = 2;
 
-        return view('seets.index',compact('seats', 'sitdowns', 'user_results', 'employees', 'tree', 'box_list','depts' ,'first_depts'/*'branches'*/));
+        foreach($depts as $dept){
+            if (strpos($dept_id_keyword, $dept->id) === false) {
+                continue;
+            }
+
+            $map_image = $dept->map_image;
+            // $select_dept = $dept;
+            // dd($select_dept);
+
+            // 各部署にフロアマップは1つのみ
+            if(!isset($box_list) && isset($dept->seet)){
+            foreach($dept->seet as $seat){
+                $box_list[] = new MapBoxService(
+                    $seat->seetnumber,
+                    $user_name = isset($seat->sitdown->user->name) ? $seat->sitdown->user->name : '空席',
+                    $seat->width,
+                    $seat->height,
+                    $seat->top,
+                    $seat->left,
+                    $seat_status = isset($seat->sitdown->status) ? $seat->sitdown->status : 'null',
+                    $seat->id
+                );
+            }
+            }
+
+            if(!isset($box_list)){
+                $box_list = "";
+            }
+
+        }
+        // dd($box_list);
+
+        return view('seets.index',compact('seats', 'sitdowns', 'user_results', 'employees', 'tree', 'box_list','depts' ,'first_depts', 'map_image'/*'branches'*/));
     }
 
     public function edit($id)
@@ -140,7 +160,6 @@ class SeetController extends Controller
 
         return redirect()->route('seets.index')->with('sitdown_delete_message', '着席情報を更新しました。');
     }
-
 }
 
 // 支社名

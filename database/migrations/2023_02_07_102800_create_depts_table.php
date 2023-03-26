@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('dept_number');
             $table->string('first_dept');
             $table->string('second_dept');
+            $table->string('map_image')->nullable();
             $table->timestamps();
         });
     }

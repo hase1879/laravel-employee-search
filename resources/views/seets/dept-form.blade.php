@@ -1,0 +1,16 @@
+{{-- 部署絞り込み --}}
+<form method="get" action={{ route('seets.index') }} >
+    @csrf
+    <div class="row g-3 align-items-center">
+        <div class="col-auto">
+            <select name="dept_id_keyword"  class="form-select form-select-lg ">
+                @foreach($depts as $dept)
+                    <option value="{{ $dept->id }}">{{ $dept->first_dept }}{{ $dept->second_dept }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-auto">
+            <input type="submit" value="表示する" class="btn btn-primary float-start">
+        </div>
+    </div>
+</form>

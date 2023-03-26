@@ -20,4 +20,10 @@ class Seet extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function dept(){
+        return $this->belongsTo(Dept::class);
+    }
+
+
 }

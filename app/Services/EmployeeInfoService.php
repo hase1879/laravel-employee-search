@@ -16,6 +16,7 @@ class EmployeeInfoService {
         public $mobile_phone_number,
         public $seatnumber,
         public $status,
+        public $dept_id,
     ){
 
     }

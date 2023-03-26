@@ -23,6 +23,14 @@
     <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
     <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
 
+    {{--　icon（Fontawesome） --}}
+    <link
+    rel="stylesheet"
+    href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+    crossorigin="anonymous"
+    />
+
     {{-- CSSファイル読み込み --}}
     {{-- <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" > --}}
     <style>
@@ -31,6 +39,13 @@
             min-width: 100vw;
             min-height: 100vh;
         }
+
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital@1&display=swap');
+
+        .title{
+            font-family: 'Kanit', sans-serif;
+        }
+
     </style>
 
 </head>
@@ -38,9 +53,9 @@
     <div id="app">
         @include('layouts.header')
 
-        <main>
+<main>
             @yield('content')
-        </main>
+</main>
 
         {{-- <x-common-footer /> --}}
 

@@ -1,7 +1,9 @@
 <head>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
+
+
+            <a class="navbar-brand fw-bold" href="{{ url('/') }}"><i class="fas fa-book-user fa-lg" style="color: #2600ff;"></i>
                 {{ config('app.name', 'Laravel') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -57,5 +59,22 @@
             </div>
         </div>
     </nav>
+
+    <style>
+.logo {
+/* background-color: rgb(0, 0, 0); */
+width: 80px;
+height: 80px;
+/* border: 25px solid #ffffff; */
+/* border-radius: 40px; */
+background-color: white;
+background-position: center;
+background-size: contain;
+background-repeat: no-repeat;
+position: relative;
+/* top: 20px */
+}
+
+    </style>
 
 </head>

@@ -1,10 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
 
 <div class="container-fluid">
     {{ Breadcrumbs::render('employees.show', $employee->id) }}
+
+    {{-- モーダル表示エリア --}}
+    <div class="modal-view">
+
 
     <div class="row">
         <div class="col-2">
@@ -66,35 +69,39 @@
             </table>
         </div>
     </div>
+
+    <style  type="text/css">
+
+        /* 社員プロフィール_写真 */
+        .profile-img {
+        background-color: whitesmoke;
+        width: 150px;
+        height: 200px;
+        background-image: url("{{ asset($employee->user->profile_picture.'.png') }}");
+        background-position: center;
+        background-size: contain;
+        position: relative;
+        background-repeat:no-repeat
+        }
+
+        .employee-name {
+            list-style:none;
+            margin: 10px 5px 5px 10px;
+        }
+
+        .container-fluid {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 900px; //例えば
+        }
+
+        </style>
+
+    </div>
 </div>
 
 
 
-<style  type="text/css">
 
-/* 社員プロフィール_写真 */
-.profile-img {
-background-color: whitesmoke;
-width: 150px;
-height: 200px;
-background-image: url("{{ asset($employee->user->profile_picture.'.png') }}");
-background-position: center;
-background-size: contain;
-position: relative;
-background-repeat:no-repeat
-}
-
-.employee-name {
-    list-style:none;
-    margin: 10px 5px 5px 10px;
-}
-
-.container-fluid {
-margin-right: auto;
-margin-left: auto;
-max-width: 900px; //例えば
-}
-
-</style>
 
 @endsection

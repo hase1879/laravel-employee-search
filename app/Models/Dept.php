@@ -12,4 +12,8 @@ class Dept extends Model
     public function employee(){
         return $this->hasMany(Employee::class);
     }
+
+    public function seet(){
+        return $this->hasMany(Seet::class);
+    }
 }

@@ -31,11 +31,12 @@ class SeetsTableSeeder extends Seeder
         $interpreter->addObserver(function(array $row) {
             // 該当テーブルへの登録処理
             $seets = Seet::create([
-                    'seetnumber' => $row[0],
-                    'width' => $row[1],
-                    'height' => $row[2],
-                    'top' => $row[3],
-                    'left' => $row[4],
+                    'dept_id' => $row[0],
+                    'seetnumber' => $row[1],
+                    'width' => $row[2],
+                    'height' => $row[3],
+                    'top' => $row[4],
+                    'left' => $row[5],
                ]);
         });
 

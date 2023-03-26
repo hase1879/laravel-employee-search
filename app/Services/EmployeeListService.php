@@ -31,6 +31,7 @@ function employeeList($employees,$dept_keyword){
             $employee->user->mobile_phone_number,
             $seatnumber = isset($employee->user->sitdown->seet->seetnumber) ? $employee->user->sitdown->seet->seetnumber : "離席",
             $status = isset($employee->user->sitdown->status) ? $employee->user->sitdown->status : "-",
+            $employee->dept->id,
         );
     }
 

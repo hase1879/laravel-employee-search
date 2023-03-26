@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
               },
               table: {
                   'font-size': '15px',
+                  'white-space': 'nowrap'
               }
           }
     }).render(document.getElementById("sample-table-wrapper"));

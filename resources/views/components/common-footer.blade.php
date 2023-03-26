@@ -16,4 +16,4 @@
             @endforeach
         </details>
     @endforeach --}}
-</div>
+{{-- </div> --}}

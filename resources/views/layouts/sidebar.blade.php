@@ -8,9 +8,9 @@
                 <ul>
                     @foreach ($dept_group as $first_dept => $depts)
                         <details>
-                        <summary class="py-1"><a  href="{{ route('employees.index', ['dept_keyword' => $first_dept]) }}">{{ $first_dept }}</a></summary>
+                        <summary class="py-1"><i class="fas fa-folder-open fa-lg"></i><a  class="ps-1" href="{{ route('employees.index', ['dept_keyword' => $first_dept]) }}">{{ $first_dept }}</a></summary>
                         @foreach ($depts as $dept)
-                        <li class="py-1" style="margin-left:30px"><a href="{{ route('employees.index', ['dept_keyword' => $dept->second_dept]) }}">{{ $dept->second_dept }}</a></li>
+                        <li class="py-1" style="margin-left:30px"><i class="fas fa-file fa-lg"></i><a   class="ps-1" href="{{ route('employees.index', ['dept_keyword' => $dept->second_dept]) }}">{{ $dept->second_dept }}</a></li>
                         @endforeach
                         </details>
                     @endforeach
@@ -21,12 +21,7 @@
     </div>
 </div>
 
-<link
-rel="stylesheet"
-href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-crossorigin="anonymous"
-/>
+
 
 <style type="text/css">
 
@@ -59,6 +54,19 @@ overflow-y: auto;
 
 .employee-sidemenu ul{
     padding: 0;
+}
+
+/* summary {
+  display: block;
+  list-style: none;
+} */
+
+li{
+    list-style:none;
+}
+
+i{
+    height: 20px;
 }
 
 
