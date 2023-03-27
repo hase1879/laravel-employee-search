@@ -39,6 +39,7 @@ class DeptsTableSeeder extends Seeder
                         'dept_number' => $row[0],
                         'first_dept' => $row[1],
                         'second_dept' => $row[2],
+                        'map_image' => $row[3],
                    ]);
             });
 

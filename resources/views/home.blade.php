@@ -28,9 +28,9 @@
         })();
     </script>
 
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+    <div class="row justify-content-center mt-5">
+        {{-- <div class="col-md-8"> --}}
+            {{-- <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
@@ -42,8 +42,61 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+            </div> --}}
+
+
+        {{-- </div> --}}
+
+            <div class="col-3">
+                <a href="{{ route('employees.index') }}" class="btn-home"><i class="fas fa-chair-office"></i><h3>座席表</h3></a>
             </div>
-        </div>
+
+            <div class="col-3">
+                <a href="{{ route('seets.index') }}" class="btn-home"><i class="fas fa-users"></i><h3>社員一覧</h3></a>
+            </div>
+
+            <div class="col-3">
+                <a href="{{ route('employees.index') }}" class="btn-home"><i class="fas fa-user"></i><h3>マイページ</h3></a>
+            </div>
+
     </div>
 </div>
+
+<style>
+
+a.btn-home {
+	display: block;
+	text-align: center;
+	vertical-align: middle;
+	text-decoration: none;
+	position: relative;
+	width: 280px;
+    height: 216px;
+	margin: auto;
+	padding: 1rem 4rem;
+	font-weight: bold;
+	border-radius: 0.3rem;
+	border-bottom: 7px solid #b0b9ff;
+	background: white;
+	color: #000000;
+    border-radius: 40px;
+    padding: 25px;
+}
+
+a.btn-home:hover {
+	margin-top: 6px;
+	border-bottom: 1px solid #b0b9ff;
+	color: #000000;
+    border-radius: 40px;
+}
+
+a.btn-home i{
+font-size: 100px;
+color: #919eff;
+padding:16px;
+}
+
+</style>
+
+
 @endsection

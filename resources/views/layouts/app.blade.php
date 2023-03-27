@@ -31,10 +31,18 @@
     crossorigin="anonymous"
     />
 
+    {{-- ログイン画面_CSS --}}
+    <link rel="stylesheet" href="{{ asset('/css/login.css') }}">
+
+    {{-- Fontawesome_CSS --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"> --}}
+
     {{-- CSSファイル読み込み --}}
     {{-- <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" > --}}
     <style>
+
         main {
+
             background-color: #F2F2F2;
             min-width: 100vw;
             min-height: 100vh;

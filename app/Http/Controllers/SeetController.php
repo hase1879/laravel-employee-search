@@ -50,7 +50,6 @@ class SeetController extends Controller
             if(!isset($tree[$first_dept][$second_dept]))$tree[$first_dept][$second_dept] = [];
             $tree[$first_dept][$second_dept][] = $employee;
         }
-        // dd($map_image);
 
         // // // データのツリー化
         // $employees = Employee::with('user')->get();
@@ -87,8 +86,6 @@ class SeetController extends Controller
             }
 
             $map_image = $dept->map_image;
-            // $select_dept = $dept;
-            // dd($select_dept);
 
             // 各部署にフロアマップは1つのみ
             if(!isset($box_list) && isset($dept->seet)){
@@ -111,7 +108,6 @@ class SeetController extends Controller
             }
 
         }
-        // dd($box_list);
 
         return view('seets.index',compact('seats', 'sitdowns', 'user_results', 'employees', 'tree', 'box_list','depts' ,'first_depts', 'map_image'/*'branches'*/));
     }
@@ -143,8 +139,6 @@ class SeetController extends Controller
         }else{
             $service->離席($user, $seat);
         }
-
-
 
         // try-catchでエラーを全てステータス更新ページに遷移
         return redirect()->route('seets.index');
