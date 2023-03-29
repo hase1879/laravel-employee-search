@@ -56,7 +56,7 @@
             </div>
 
             <div class="col-3">
-                <a href="{{ route('employees.index') }}" class="btn-home"><i class="fas fa-user"></i><h3>マイページ</h3></a>
+                <a href="{{ route('mypage') }}" class="btn-home"><i class="fas fa-user"></i><h3>マイページ</h3></a>
             </div>
 
     </div>

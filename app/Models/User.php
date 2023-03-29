@@ -42,7 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'mobile_phone_number',
         'zip_code',
         'present_address',
-
+        'password',
     ];
 
 
