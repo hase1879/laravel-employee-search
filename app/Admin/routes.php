@@ -15,4 +15,7 @@ Route::group([
     $router->resource('seets', SeatController::class);
     $router->post('seets/import', [SeatController::class, 'csvImport']);
 
+    // ルーティングの設定
+    $router->resource('users', UserController::class);
+
 });

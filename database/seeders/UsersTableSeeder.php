@@ -49,6 +49,7 @@ class UsersTableSeeder extends Seeder
                         'zip_code' => $row[11],
                         'present_address' => $row[12],
                         'id' => $row[14],
+                        'password' => $row[15],
 
                    ]);
             });

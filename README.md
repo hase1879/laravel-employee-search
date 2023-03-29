@@ -29,3 +29,6 @@ C: 1-12
 
 座席情報(seats)
     - x, y, width, height
+
+
+issue test2
