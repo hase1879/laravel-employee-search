@@ -26,7 +26,7 @@ class UserController extends AdminController
     {
         $grid = new Grid(new User());
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('profile_picture', __('Profile picture'));
         $grid->column('user_number', __('User number'));
         $grid->column('name', __('Name'));
@@ -43,8 +43,13 @@ class UserController extends AdminController
         $grid->column('email_verified_at', __('Email verified at'));
         $grid->column('password', __('Password'));
         $grid->column('remember_token', __('Remember token'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('created_at', __('Created at'))->sortable();
+        $grid->column('updated_at', __('Updated at'))->sortable();
+
+        $grid->filter(function($filter){
+            $filter->like('name', '氏名');
+            $filter->between('created_at', '登録日')->datetime();
+        });
 
         return $grid;
     }

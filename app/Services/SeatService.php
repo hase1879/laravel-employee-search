@@ -7,8 +7,38 @@ use App\Models\Sitdown;
 use App\Models\User;
 // 例外処理用
 use Exception;
+use Ramsey\Uuid\Type\Integer;
+
+enum SeatStatusEnum: int
+{
+    case 着席 = 1;
+    case 会議中 = 2;
+    case 一時離席 = 3;
+    case 離席 = -1;
+}
 
 class SeatService {
+
+    function __construct(private User $user)
+    {
+
+    }
+
+    function updateStatus(Seet $seat, $status_number){
+
+        $status = SeatStatusEnum::from($status_number);
+
+        if ($status == SeatStatusEnum::着席){
+            $this->着席($this->user, $seat);
+        }elseif ($status == SeatStatusEnum::会議中){
+            $this->会議中に変更($this->user, $seat);
+        }elseif ($status == SeatStatusEnum::一時離席){
+            $this->一時的に離席した($this->user, $seat);
+        }else{
+            $this->離席($this->user, $seat);
+        }
+
+    }
 
     function is着席中(User $user) : Bool {
 

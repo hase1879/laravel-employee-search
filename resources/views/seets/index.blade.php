@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+
+@section('head')
+<style type="text/css">
+@import url("{{ asset('css/seat.css') }}");
+</style>
+
+<script src="{{ asset("/js/seat.js") }}"></script>
+@endsection
+
 @section('content')
 
 <div class="container px-0">
@@ -52,12 +61,16 @@
 
                     <div id="js-map"  class="map"></div>
 
-                    <link rel="stylesheet" href="{{ asset('css/seat.css') }}">
                     <script>
-                        const box_list = @json($box_list);
-                        const map_image = @json($map_image);
+                        $(function(){
+                            const box_list = @json($box_list);
+                            const map_image = @json($map_image);
+                            const edit_url = "{{ route('seets.index') }}";
+
+                            setup_seat(box_list, map_image, edit_url);
+                        });
                     </script>
-                    <script src="{{ asset("/js/seat.js") }}"></script>
+
                 </div>
 
             </div>
