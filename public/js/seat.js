@@ -8,13 +8,13 @@ function setup_seat(box_list, map_image, edit_url){
         $div.css("left", box.left + "px");
         $div.css("position","absolute")
         if(box.status == "1") {
-            $div.css('background-color','rgba(9, 255, 0, 0.461)');
+            $div.css('background-color','rgba(6, 221, 35, 0.463)');
         } else if(box.status == "2") {
-            $div.css('background-color','rgba(225, 255, 0, 0.461)');
+            $div.css('background-color','rgba(251, 255, 0, 0.463)');
         } else if(box.status == "3") {
-            $div.css('background-color','rgba(174, 0, 255, 0.461)');
+            $div.css('background-color','rgba(255, 115, 0, 0.463)');
         } else {
-            $div.css('background-color','rgba(255, 13, 0, 0.461)');
+            $div.css('background-color','rgba(0, 102, 255, 0.463)');
         }
 
         $div.html(box.label+"<br>"+box.seat_user);

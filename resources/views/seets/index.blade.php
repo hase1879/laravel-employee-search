@@ -46,20 +46,29 @@
 
             <div class="pd-10">
 
-                {{-- form --}}
-                @include("seets.dept-form")
-
                 {{-- 社員一覧ページでのmodal表示箇所 --}}
                 <div class="modal-view">
 
+                    {{-- タイトル --}}
                     @foreach ($tree as $first_dept=>$second_depts)
                         @foreach($second_depts as $second_dept=>$employees)
                             <h3 class="pt-4">{{ $first_dept }}&thinsp;{{ $second_dept }}</h3>
                         @endforeach
                     @endforeach
 
+                    {{-- 凡例 --}}
+                    <div class="example">
+                        <div class="RISEKI">空席</div>
+                        <div class="CHAKUSEKI">着席中</div>
+                        <div class="KAIGI">会議中</div>
+                        <div class="ICHIJIRISEKI">一時離席中</div>
+                        <div class="back"></div>
+                    </div>
 
 
+
+
+                    {{-- 座席Map画像を表示 --}}
                     <div id="js-map"  class="map"></div>
 
                     <script>

@@ -45,3 +45,91 @@ display: block;
 overflow-x: hidden;
 overflow-y: auto;
 }
+
+/* 着席ステータスの凡例 */
+.example{
+    position: relative;
+}
+
+
+.example .CHAKUSEKI{
+
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 75px;
+    height: 52px;
+    top: -48px;
+    left: 536px;
+    background-color: rgba(6, 221, 35, 0.463);
+    z-index: 10;
+}
+
+.example .KAIGI{
+
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 75px;
+    height: 52px;
+    top: -48px;
+    left: 636px;
+    background-color: rgba(251, 255, 0, 0.463);
+    z-index: 10;
+}
+
+.example .ICHIJIRISEKI{
+
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 75px;
+    height: 52px;
+    top: -48px;
+    left: 736px;
+    background-color: rgba(255, 115, 0, 0.463);
+    z-index: 10;
+}
+
+.example .RISEKI{
+
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 75px;
+    height: 52px;
+    top: -48px;
+    left: 836px;
+    background-color: rgba(0, 102, 255, 0.463);
+    z-index: 10;
+}
+
+.example .back{
+
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 416px;
+    height: 69px;
+    top: -57px;
+    left: 513px;
+    background-color: white;
+    border-radius:16px;
+    z-index: 0;
+}
+

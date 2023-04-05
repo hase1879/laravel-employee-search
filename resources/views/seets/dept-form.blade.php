@@ -1,7 +1,7 @@
 {{-- 部署絞り込み --}}
 <form method="get" action={{ route('seets.index') }} >
     @csrf
-    <div class="row g-3 align-items-center">
+    <div class="row g-1 align-items-center">
         <div class="col-auto">
             <select name="dept_id_keyword"  class="form-select">
 
