@@ -1,7 +1,10 @@
 // HTMLからテーブルデータを取得し、grid.jsにて再描画。
 document.addEventListener('DOMContentLoaded', function () {
+    // Grid.jsコード
     const grid = new gridjs.Grid({
+        // from: で、HTMLの<table>タグを変換
           from: document.getElementById("sample-table"),
+        //   各種テーブル設定
           pagination: {
               limit: 10
           },
@@ -23,5 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
                   'white-space': 'nowrap'
               }
           }
+    //   対象のIDへ描画
     }).render(document.getElementById("sample-table-wrapper"));
 });
