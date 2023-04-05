@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Routing\Router;
+use App\Admin\Controllers\UserController;
 
 Admin::routes();
 
@@ -17,5 +18,8 @@ Route::group([
 
     // ルーティングの設定
     $router->resource('users', UserController::class);
+
+    // CSVインポート
+    $router->post('users/import', [UserController::class, 'csvImport']);
 
 });

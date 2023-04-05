@@ -32,5 +32,5 @@ function setup_seat(box_list, map_image, edit_url){
     // const map_image = @json($map_image);
     console.log(map_image);
 
-    $(".map").css("background-image","url(../" + map_image +".png)");
+    $(".map").css("background-image","url(.." + map_image + ")");
 }

@@ -54,14 +54,14 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
+        ],
 
-            // ストレージに画像ファイル作成可能とする
-            'admin' => [
-                'driver' =>'local',
-                'root' => public_path(''),
-                'visibility' =>'public',
-                'url' => env('APP_URL'),
-            ],
+        // ストレージに画像ファイル作成可能とする
+        'admin' => [
+            'driver' =>'local',
+            'root' => public_path(''),
+            'visibility' =>'public',
+            'url' => env('APP_URL'),
         ],
 
     ],

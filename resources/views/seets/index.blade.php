@@ -11,6 +11,7 @@
 
 @section('content')
 
+
 <div class="container px-0">
     <div class="row g-0">
 
@@ -52,9 +53,9 @@
                 <div class="modal-view">
 
                     @foreach ($tree as $first_dept=>$second_depts)
-                    @foreach($second_depts as $second_dept=>$employees)
-                        <h3 class="pt-4">{{ $first_dept }}&thinsp;{{ $second_dept }}</h3>
-                    @endforeach
+                        @foreach($second_depts as $second_dept=>$employees)
+                            <h3 class="pt-4">{{ $first_dept }}&thinsp;{{ $second_dept }}</h3>
+                        @endforeach
                     @endforeach
 
 

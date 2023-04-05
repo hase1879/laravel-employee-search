@@ -27,6 +27,7 @@ class SeetController extends Controller
 
         return view('seets.index',$logic->search($dept_id_keyword));
 
+
     }
 
     public function edit($id)
@@ -67,6 +68,7 @@ class SeetController extends Controller
 
         return redirect()->route('seets.index')->with('sitdown_delete_message', '着席情報を更新しました。');
     }
+
 
 
 }
