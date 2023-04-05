@@ -20,7 +20,7 @@
                                 </tr>
                                 @foreach($employees as $employee)
                                     <tr>
-                                        <td class="icon" rowspan="2" style="text-align: center;"><img src="{{ asset('img/employee_blue.png') }}"></td>
+                                        <td class="icon" rowspan="2" style="text-align: center;"><img src="{{ asset($employee->user->profile_picture) }}"></td>
                                         <td class="seat-info"  cellpadding="1">
                                                 {{$seatnumber = isset( $employee->user->sitdown->seet->seetnumber ) ? $employee->user->sitdown->seet->seetnumber : "－"}}
                                             :&nbsp;

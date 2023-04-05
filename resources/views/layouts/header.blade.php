@@ -3,7 +3,7 @@
         <div class="container">
 
 
-            <a class="navbar-brand fw-bold" href="{{ url('/') }}"><i class="fas fa-book-user fa-lg" style="color: #2600ff;"></i>
+            <a class="navbar-brand fw-bold" href="{{ url('/home') }}"><i class="fas fa-book-user fa-lg" style="color: #2600ff;"></i>
                 {{ config('app.name', 'Laravel') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
