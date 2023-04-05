@@ -56,6 +56,14 @@ return [
             'throw' => false,
         ],
 
+        // ストレージに画像ファイル作成可能とする
+        'admin' => [
+            'driver' =>'local',
+            'root' => public_path(''),
+            'visibility' =>'public',
+            'url' => env('APP_URL'),
+        ],
+
     ],
 
     /*

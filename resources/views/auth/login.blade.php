@@ -58,6 +58,17 @@
                     新規登録
                 </a>
             </div>
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <input type="hidden" name="email" value="demo@example.com" />
+                <input type="hidden" name="password" value="demo" />
+
+                <input type="submit" value="Guest Login" />
+            </form>
+
+            <input type="button" value="Guest Login" onclick="$('[name=email]').val('demo@example.com');$('[name=password]').val('demo').parents('form').submit();"/>
         </div>
     </div>
 </div>

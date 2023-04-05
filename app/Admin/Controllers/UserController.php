@@ -8,6 +8,14 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
+// CSV機能
+use App\Admin\Extensions\Tools\CsvImport;
+use Goodby\CSV\Import\Standard\Lexer;
+use Goodby\CSV\Import\Standard\Interpreter;
+use Goodby\CSV\Import\Standard\LexerConfig;
+use Illuminate\Http\Request;
+
+
 class UserController extends AdminController
 {
     /**
@@ -26,8 +34,8 @@ class UserController extends AdminController
     {
         $grid = new Grid(new User());
 
-        $grid->column('id', __('Id'));
-        $grid->column('profile_picture', __('Profile picture'));
+        $grid->column('id', __('Id'))->sortable();
+        $grid->column('profile_picture', __('Profile picture'))->image();
         $grid->column('user_number', __('User number'));
         $grid->column('name', __('Name'));
         $grid->column('furigana', __('Furigana'));
@@ -41,12 +49,65 @@ class UserController extends AdminController
         $grid->column('zip_code', __('Zip code'));
         $grid->column('present_address', __('Present address'));
         $grid->column('email_verified_at', __('Email verified at'));
-        $grid->column('password', __('Password'));
-        $grid->column('remember_token', __('Remember token'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('created_at', __('Created at'))->sortable();
+        $grid->column('updated_at', __('Updated at'))->sortable();
+
+        $grid->filter(function($filter){
+            $filter->like('name', '氏名');
+            $filter->between('created_at', '登録日')->datetime();
+        });
+
+        // CSVデータ
+        $grid->tools(function ($tools) {
+            $tools->append(new CsvImport());
+        });
 
         return $grid;
+    }
+
+    // CSVデータ
+    public function csvImport(Request $request)
+    {
+        $file = $request->file('file');
+        $lexer_config = new LexerConfig();
+        $lexer = new Lexer($lexer_config);
+
+        $interpreter = new Interpreter();
+        $interpreter->unstrict();
+
+        $rows = array();
+        $interpreter->addObserver(function (array $row) use (&$rows) {
+            $rows[] = $row;
+        });
+
+        $lexer->parse($file, $interpreter);
+        foreach ($rows as $key => $value) {
+
+            if (count($value) == 13) {
+                User::create([
+                    'profile_picture' => $value[0],
+                    'user_number' => $value[1],
+                    'name' => $value[2],
+                    'furigana' => $value[3],
+                    'age' => $value[4],
+                    'date_of_Birth' => $value[5],
+                    'join_date' => $value[6],
+                    'gender' => $value[7],
+                    'email' => $value[8],
+                    'phone_number' => $value[9],
+                    'mobile_phone_number' => $value[10],
+                    'zip_code' => $value[11],
+                    'present_address' => $value[12],
+                ]);
+            }
+        }
+
+        return response()->json(
+            ['data' => '成功'],
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE
+        );
     }
 
     /**
@@ -60,7 +121,7 @@ class UserController extends AdminController
         $show = new Show(User::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('profile_picture', __('Profile picture'));
+        $show->field('profile_picture', __('Profile picture'))->image();
         $show->field('user_number', __('User number'));
         $show->field('name', __('Name'));
         $show->field('furigana', __('Furigana'));
@@ -74,8 +135,6 @@ class UserController extends AdminController
         $show->field('zip_code', __('Zip code'));
         $show->field('present_address', __('Present address'));
         $show->field('email_verified_at', __('Email verified at'));
-        $show->field('password', __('Password'));
-        $show->field('remember_token', __('Remember token'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -105,8 +164,6 @@ class UserController extends AdminController
         $form->text('zip_code', __('Zip code'));
         $form->text('present_address', __('Present address'));
         $form->datetime('email_verified_at', __('Email verified at'))->default(date('Y-m-d H:i:s'));
-        $form->password('password', __('Password'));
-        $form->text('remember_token', __('Remember token'));
 
         return $form;
     }

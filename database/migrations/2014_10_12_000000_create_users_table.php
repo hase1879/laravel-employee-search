@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('profile_picture')->default('');
+            $table->string('profile_picture')->default(''); //imgへのパス
             $table->string('user_number')->nullable();
 
             $table->string('name');
