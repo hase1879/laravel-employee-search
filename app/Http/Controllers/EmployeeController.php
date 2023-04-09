@@ -3,13 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
-use App\Models\User;
 use App\Models\Dept;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Services\TreeGroupService;
-use App\Services\TreeBranchService;
-use App\Services\EmployeeInfoService;
 use App\Services\EmployeeListService;
 use Exception;
 

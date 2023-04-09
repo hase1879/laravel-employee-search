@@ -37,7 +37,7 @@ function employeeList($employees,$dept_keyword){
         );
     }
 
-
+    // 例外処理
     if(!isset($employee_list)){
         throw new Exception("選択した部署に社員は所属していません。");
     }

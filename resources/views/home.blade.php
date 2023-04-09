@@ -29,36 +29,17 @@
     </script>
 
     <div class="row justify-content-center mt-5">
-        {{-- <div class="col-md-8"> --}}
-            {{-- <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+        <div class="col-12 col-xl-3 mb-5">
+            <a href="{{ route('seets.index') }}" class="btn-home"><i class="fas fa-chair-office"></i><h3>座席表</h3></a>
+        </div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        <div class="col-12 col-xl-3 mb-5">
+            <a href="{{ route('employees.index') }}" class="btn-home"><i class="fas fa-users"></i><h3>社員一覧</h3></a>
+        </div>
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div> --}}
-
-
-        {{-- </div> --}}
-
-            <div class="col-3">
-                <a href="{{ route('employees.index') }}" class="btn-home"><i class="fas fa-chair-office"></i><h3>座席表</h3></a>
-            </div>
-
-            <div class="col-3">
-                <a href="{{ route('seets.index') }}" class="btn-home"><i class="fas fa-users"></i><h3>社員一覧</h3></a>
-            </div>
-
-            <div class="col-3">
-                <a href="{{ route('mypage') }}" class="btn-home"><i class="fas fa-user"></i><h3>マイページ</h3></a>
-            </div>
-
+        <div class="col-12 col-xl-3 mb-5">
+            <a href="{{ route('mypage') }}" class="btn-home"><i class="fas fa-user"></i><h3>マイページ</h3></a>
+        </div>
     </div>
 </div>
 

@@ -17,12 +17,15 @@
 
         <p class="secondary-text">「座席表＋社員名簿」管理、EmployeeSearch</p>
 
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
 
-        <a href="" class="btn btn--orange btn--radius">
-            今すぐ
-            <br>
-            始める
-        </a>
+            <input type="hidden" name="email" value="demo@example.com" />
+            <input type="hidden" name="password" value="demo" />
+
+            <input type="submit" value="ゲストログイン" class="btn btn--orange btn--radius"/>
+        </form>
+
         <img class="atamakakaeru" src="{{asset('img/first_view_atamakakaeru.png')}}">
     </div>
 </div>
@@ -96,16 +99,18 @@
 
 <div class="bg-blue py-5">
     <div class="text-start">さあ、EmployeeSearchを初めてみましょう！</div>
-    <a href="" class="btn btn--start btn--radius-start">今すぐ始める</a>
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+
+        <input type="hidden" name="email" value="demo@example.com" />
+        <input type="hidden" name="password" value="demo" />
+
+        <input type="submit" value="ゲストログイン" class="btn btn--start btn--radius-start"/>
+    </form>
 </div>
-
-
-
 
 {{-- Todo:headへ移動--}}
 <link rel="stylesheet" href="{{asset("css/top.css")}}">
-
-
 
 @endsection
 

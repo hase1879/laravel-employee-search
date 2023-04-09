@@ -3,7 +3,7 @@
         <div class="container">
 
 
-            <a class="navbar-brand fw-bold" href="{{ url('/home') }}"><i class="fas fa-book-user fa-lg" style="color: #2600ff;"></i>
+            <a class="navbar-brand fw-bold" href="{{ url('/') }}"><i class="fas fa-book-user fa-lg" style="color: #2600ff;"></i>
                 {{ config('app.name', 'Laravel') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -13,6 +13,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}">ホーム</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('seets.index') }}">座席表</a>
                     </li>
@@ -25,6 +28,16 @@
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
                     @guest
+                        {{-- ゲストログイン --}}
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <input type="hidden" name="email" value="demo@example.com" />
+                            <input type="hidden" name="password" value="demo" />
+
+                            <input type="submit" value="Guest Login" class="head-guest nav-link" />
+                        </form>
+
                         @if (Route::has('login'))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

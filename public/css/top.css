@@ -1,51 +1,7 @@
-
-/* 頭を抱える女の子 */
-.atamakakaeru{
-    width: 150px;
-    height: 150px;
-    top: 53px;
-    left: 313px;
-    position: absolute;
-    background-image: url("../img/first_view_atamakakaeru.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat:no-repeat;
-    opacity: 0.3;
-    z-index: 10 !important;
-}
-
-/* ボタン */
-.btn--orange,
-a.btn--orange {
-  color: #fff;
-  /* background-image: linear-gradient(90deg, rgb(17, 14, 87), rgb(41, 48, 185) 100%); */
-  /* background-color: #0093E9;
-  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%); */
-  background-color: #4158D0;
-  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-
-
-
-
-  width: 100px;
-  position: absolute;
-  top: 260px;
-}
-.btn--orange:hover,
-a.btn--orange:hover {
-  color: #fff;
-  background-image: radial-gradient(closest-corner, rgba(150, 167, 241, 1) 10%, rgba(115, 248, 246, 1));
-  opacity: 0.75;
-  width: 100px;
-}
-a.btn--radius {
-   border-radius: 100vh;
-}
-
 /*
-* top-description
+* ファーストビュー
 */
-
+/* 背景 */
 .first-view-flex {
     width: 100vw;
     height: 663px;
@@ -68,7 +24,7 @@ position: relative;
 padding: 20px 40px;
 }
 
-/* 子側 */
+/* 子要素_パソコンの画像 */
 .first-view .pc {
 font-size: 14px;
 width: 500px;
@@ -82,6 +38,22 @@ justify-content: center;
 position: absolute;
 }
 
+/* 子要素_頭を抱える女の子の画像 */
+.atamakakaeru{
+    width: 150px;
+    height: 150px;
+    top: 53px;
+    left: 313px;
+    position: absolute;
+    background-image: url("../img/first_view_atamakakaeru.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat:no-repeat;
+    opacity: 0.3;
+    z-index: 10 !important;
+}
+
+/* 子要素_テキスト１ */
 .first-view .primary-text{
     color:#fff;
     z-index: 99 !important;
@@ -90,6 +62,7 @@ position: absolute;
     line-height: 1.5;
 }
 
+/* 子要素_テキスト２ */
 .first-view .secondary-text{
     padding: 10px 0 6px 0 ;
     margin: 0;
@@ -99,6 +72,34 @@ position: absolute;
     top: 205px;
 }
 
+/* 子要素_ボタン一色 */
+.btn--orange,
+a.btn--orange {
+  color: #fff;
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  width: 113px;
+  position: absolute;
+  top: 260px;
+}
+
+.btn--orange:hover,
+a.btn--orange:hover {
+  color: #fff;
+  background-image: radial-gradient(closest-corner, rgba(150, 167, 241, 1) 10%, rgba(115, 248, 246, 1));
+  opacity: 0.75;
+  width: 113px;
+}
+
+a.btn--radius {
+   border-radius: 100vh;
+}
+
+
+/*
+* section_EmployeeSearchとは？
+*/
+/* 親要素 */
 .title {
     position: relative;
     width: 800px;
@@ -111,9 +112,8 @@ position: absolute;
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* color: rgb(0, 166, 255); */
     font-size: 32px;
-    margin-top: 60px;
+    margin-top: 150px;
 }
 
 /* 親要素 */
@@ -136,19 +136,22 @@ position: absolute;
     font-size: 16px;
   }
 
-    /* 子要素 */
-    .yubiwosasu {
-        width: 157px;
-        height: 150px;
-        background-image: url("../img/yubiwosasu.png");
-        background-position: center;
-        background-size: contain;
-        background-repeat:no-repeat;
-    }
+/* 子要素 */
+.yubiwosasu {
+    width: 157px;
+    height: 150px;
+    background-image: url("../img/yubiwosasu.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat:no-repeat;
+}
 
 
 
-/* section_具体的な使い方*/
+/*
+* section_具体的な使い方
+*/
+/* 親要素 */
 .bg-gray-vertical {
     display: flex;
     width: 100vw;
@@ -157,11 +160,12 @@ position: absolute;
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.546);
-    /* color: rgb(0, 166, 255); */
     text-align: center;
     padding: 30px;
+    margin-top: 40px;
 }
 
+/* 子要素_悩む人の画像 */
 .map-question{
     width: 600px;
     height: 350px;
@@ -176,9 +180,9 @@ position: absolute;
 }
 
 /*
-* スマートな検索
+* section_スマートな検索
 */
-/* 親要素 */
+/* 親要素_背景 */
 .bg-gray-beside {
     display: flex;
     width: 100vw;
@@ -188,7 +192,7 @@ position: absolute;
     background-color: #ffffff8b;
 }
 
-/* 子要素 */
+/* 子要素_テキスト */
 .box-text{
     display:flex;
     justify-content: center;
@@ -198,7 +202,7 @@ position: absolute;
     font-size: 16px;
 }
 
-/* 子要素 */
+/* 子要素_PCの画像 */
 .pc-employee {
     width: 400px;
     height: 350px;
@@ -210,7 +214,7 @@ position: absolute;
 }
 
 /*
-* 居場所の把握
+* section_居場所の把握
 */
 /* 子要素 */
 .pc-seat {
@@ -223,7 +227,7 @@ position: absolute;
     margin-right: 30px;
 }
 
-/* relative */
+/* 子要素_気づく人の画像 */
 .kizuku {
     position: relative;
     width: 150px;
@@ -236,15 +240,10 @@ position: absolute;
     background-repeat:no-repeat;
 }
 
-
-
 /*
-* さあ、はじめてみましょう
+* section_さあ、はじめてみましょう
 */
-
-
-
-/* 親要素 */
+/* 親要素_背景 */
 .bg-blue {
     margin-top: 200px;
     display: flex;
@@ -256,7 +255,7 @@ position: absolute;
     background-image: linear-gradient(90deg, rgba(26, 118, 201, 1), rgba(184, 14, 255, 1));
 }
 
-/* 子要素 */
+/* 子要素_テキスト */
 .text-start {
     width: 100vw;
     height: 100px;
@@ -270,7 +269,7 @@ position: absolute;
     font-size: 32px;
 }
 
-/* ボタン */
+/* 子要素_ボタン一式 */
 .btn--start,
 a.btn--start {
   color: #fff;
@@ -285,42 +284,18 @@ a.btn--start:hover {
   background-color:rgb(23, 208, 236);
   opacity: 0.75;
   width: 302px;
-  /* height: 500px; */
 }
 
 a.btn--radius-start {
    border-radius: 15px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*
+* 矢印アイコン
+*/
 .arrow {
     color: #400DD1;
     font-size: 80px;
     opacity: 0.7;
     margin: 50px 0;
 }
-
-
-
-.content{
-    display:flex;
-    /* flex-direction: column; */
-    align-items: center;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
-    margin: 0 auto;
-}
-

@@ -15,19 +15,22 @@ class CreateDemoUser extends Seeder
      */
     public function run()
     {
-        //
+
+        // デモユーザーデータ
         $userId = "demo@example.com";
         $password = "demo";
 
         $user = \App\Models\User::where("email","=",$userId)->first();
 
+        // Factoryでデモユーザーデータ登録
         if(!$user){
             $user = \App\Models\User::factory()->create([
                 'name' => 'Demo User',
                 'email' => $userId,
-                "password" => Hash::make($password)
+                "password" => Hash::make($password) //hashファサードでPW作成
             ]);
         }
+
 
         dump($user->id);
 

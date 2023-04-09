@@ -54,6 +54,15 @@
             font-family: 'Kanit', sans-serif;
         }
 
+        /* ヘッダー_ゲストログイン */
+        .head-guest {
+            border: none;
+            outline: none;
+            background: transparent;
+            font-weight: bold;
+
+        }
+
     </style>
 
     @yield('head')
