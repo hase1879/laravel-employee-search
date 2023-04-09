@@ -17,10 +17,12 @@
 
         @include("seets.sidemenu")
 
-        {{-- コンテンツ --}}
         <div class="col-12 col-lg-10 bg-blue p-3">
-            {{ Breadcrumbs::render('employees.index') }}
+
+            {{ Breadcrumbs::render('seets.index') }}
+
             <div class="canvas mt-10">
+
                 {{-- 例外処理 --}}
                 @if (session('message'))
                 <script>
@@ -64,9 +66,6 @@
                         <div class="ICHIJIRISEKI">一時離席中</div>
                         <div class="back"></div>
                     </div>
-
-
-
 
                     {{-- 座席Map画像を表示 --}}
                     <div id="js-map"  class="map"></div>

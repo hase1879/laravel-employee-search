@@ -1,0 +1,326 @@
+
+/* 頭を抱える女の子 */
+.atamakakaeru{
+    width: 150px;
+    height: 150px;
+    top: 53px;
+    left: 313px;
+    position: absolute;
+    background-image: url("../img/first_view_atamakakaeru.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat:no-repeat;
+    opacity: 0.3;
+    z-index: 10 !important;
+}
+
+/* ボタン */
+.btn--orange,
+a.btn--orange {
+  color: #fff;
+  /* background-image: linear-gradient(90deg, rgb(17, 14, 87), rgb(41, 48, 185) 100%); */
+  /* background-color: #0093E9;
+  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%); */
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
+
+
+
+  width: 100px;
+  position: absolute;
+  top: 260px;
+}
+.btn--orange:hover,
+a.btn--orange:hover {
+  color: #fff;
+  background-image: radial-gradient(closest-corner, rgba(150, 167, 241, 1) 10%, rgba(115, 248, 246, 1));
+  opacity: 0.75;
+  width: 100px;
+}
+a.btn--radius {
+   border-radius: 100vh;
+}
+
+/*
+* top-description
+*/
+
+.first-view-flex {
+    width: 100vw;
+    height: 663px;
+    background-color: #400DD1;
+}
+
+/* 親側 */
+.first-view {
+background-color: rgb(0, 0, 0);
+width: 840px;
+height: 663px;
+top: 0%;
+left: 50%;
+transform: translateX(-50%);
+background-color: #400DD1;
+background-position: center;
+background-size: contain;
+background-repeat: no-repeat;
+position: relative;
+padding: 20px 40px;
+}
+
+/* 子側 */
+.first-view .pc {
+font-size: 14px;
+width: 500px;
+height: auto;
+top: 289px;
+left: 325px;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: center;
+position: absolute;
+}
+
+.first-view .primary-text{
+    color:#fff;
+    z-index: 99 !important;
+    position: absolute;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+}
+
+.first-view .secondary-text{
+    padding: 10px 0 6px 0 ;
+    margin: 0;
+    font-size: large;
+    letter-spacing: 0.05em;
+    position: absolute;
+    top: 205px;
+}
+
+.title {
+    position: relative;
+    width: 800px;
+    height: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(255, 255, 255);
+    border-radius:16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* color: rgb(0, 166, 255); */
+    font-size: 32px;
+    margin-top: 60px;
+}
+
+/* 親要素 */
+.two-column{
+    display:flex;
+    width: 100vw;
+    padding:10px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 子要素 */
+  .box-item{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 474px;
+    height: 300px;
+    padding:15px 40px;
+    font-size: 16px;
+  }
+
+    /* 子要素 */
+    .yubiwosasu {
+        width: 157px;
+        height: 150px;
+        background-image: url("../img/yubiwosasu.png");
+        background-position: center;
+        background-size: contain;
+        background-repeat:no-repeat;
+    }
+
+
+
+/* section_具体的な使い方*/
+.bg-gray-vertical {
+    display: flex;
+    width: 100vw;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.546);
+    /* color: rgb(0, 166, 255); */
+    text-align: center;
+    padding: 30px;
+}
+
+.map-question{
+    width: 600px;
+    height: 350px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../img/top-map-question.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat:no-repeat;
+    padding-top: 10px;
+}
+
+/*
+* スマートな検索
+*/
+/* 親要素 */
+.bg-gray-beside {
+    display: flex;
+    width: 100vw;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff8b;
+}
+
+/* 子要素 */
+.box-text{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 300px;
+    height: 300px;
+    font-size: 16px;
+}
+
+/* 子要素 */
+.pc-employee {
+    width: 400px;
+    height: 350px;
+    background-image: url("../img/top_pc_employee.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat:no-repeat;
+    margin-left: 30px;
+}
+
+/*
+* 居場所の把握
+*/
+/* 子要素 */
+.pc-seat {
+    width: 400px;
+    height: 350px;
+    background-image: url("../img/top_pc_seat.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat:no-repeat;
+    margin-right: 30px;
+}
+
+/* relative */
+.kizuku {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    top:0px;
+    left: 155px;
+    background-image: url("../img/top_kizuku.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat:no-repeat;
+}
+
+
+
+/*
+* さあ、はじめてみましょう
+*/
+
+
+
+/* 親要素 */
+.bg-blue {
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(90deg, rgba(26, 118, 201, 1), rgba(184, 14, 255, 1));
+}
+
+/* 子要素 */
+.text-start {
+    width: 100vw;
+    height: 100px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+/* ボタン */
+.btn--start,
+a.btn--start {
+  color: #fff;
+  background-color:rgb(23, 208, 236);
+  width: 300px;
+  /* height: 500px; */
+}
+
+.btn--start:hover,
+a.btn--start:hover {
+  color: #fff;
+  background-color:rgb(23, 208, 236);
+  opacity: 0.75;
+  width: 302px;
+  /* height: 500px; */
+}
+
+a.btn--radius-start {
+   border-radius: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.arrow {
+    color: #400DD1;
+    font-size: 80px;
+    opacity: 0.7;
+    margin: 50px 0;
+}
+
+
+
+.content{
+    display:flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    margin: 0 auto;
+}
+

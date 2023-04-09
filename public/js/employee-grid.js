@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
           search: true,
           sort: true,
           fixedHeader: true,
+          resizable: true,
           height: '700px',
           style: {
               td: {

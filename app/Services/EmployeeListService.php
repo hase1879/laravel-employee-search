@@ -20,8 +20,10 @@ function employeeList($employees,$dept_keyword){
             continue;
         }
 
+        // Formによる絞り込み後の、必要データのみ取得
         $employee_list[] = new EmployeeInfoService (
             $employee->user->id,
+            $employee->user->profile_picture,
             $employee->user->name,
             $employee->user->furigana,
             $employee->dept->first_dept,

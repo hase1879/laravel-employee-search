@@ -1,0 +1,21 @@
+
+/* リンク */
+a{
+    font-size: 14px;
+    text-decoration: none;
+    color: black;
+    font-weight:bold;
+}
+
+/* リンク */
+a:hover {
+    color: #0810f3;
+}
+
+/* プロフィール画像 */
+  img {
+    width: auto;
+    height: 43px;
+    justify-items: center;
+    text-align: center;
+  }

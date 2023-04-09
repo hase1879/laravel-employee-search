@@ -89,6 +89,7 @@ img {
     background-position: center;
     }
 
+/* 氏名 */
 .employee-name a{
     font-size: 14px;
     text-decoration: none;

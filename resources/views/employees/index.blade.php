@@ -20,8 +20,6 @@
             <div class="content">
                 {{ Breadcrumbs::render('employees.index') }}
 
-                <h1 class="title fw-bold">社員一覧</h1>
-
                 {{-- grid.jsにて再出力 --}}
                 <div id="sample-table-wrapper"></div>
 
@@ -30,29 +28,37 @@
                     <thead>
                         <tr>
                             <th>氏名</th>
-                            <th>ふりがな</th>
-                            <th>所属支社</th>
-                            <th>所属部署</th>
-                            <th>メールアドレス</th>
-                            <th>電話番号</th>
-                            <th>携帯番号</th>
-                            <th>着席位置</th>
                             <th>着席状況</th>
+                            <th>所属部署</th>
+                            <th>固定電話 / 携帯電話</th>
+                            <th>メールアドレス</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($employee_list as $employee)
-                        {{-- @dd($employee->dept_id) --}}
                         <tr>
-                            <td><a class="employees-show-link" href="{{ route('employees.show', $employee->id) }}">{{ $employee->name }}</a></td>
-                            <td>{{ $employee->furigana }}</td>
-                            <td>{{ $employee->first_dept }}</td>
-                            <td>{{ $employee->second_dept }}</td>
+                            <td>
+                                <a class="employees-show-link" href="{{ route('employees.show', $employee->id) }}">
+                                    <img src="{{ asset($employee->profile_picture) }}">
+                                    &thinsp;
+                                    {{ $employee->name }}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="seats-show-link" href="{{ route('seets.index',[ "dept_id_keyword" => $employee->dept_id]) }}">
+                                    座席:&ensp;{{ $employee->seatnumber }}
+                                    <br>
+                                    {{-- Todo:マジックナンバーを文字へ変換 --}}
+                                    ステータス:&ensp;{{ $employee->status }}
+                                </a>
+                            </td>
+                            <td>{{ $employee->first_dept }}<br>{{ $employee->second_dept }}</td>
+                            <td>
+                                <i class="fas fa-phone-office"></i>&ensp;{{ $employee->phone_number }}
+                                <br>
+                                <i class="fas fa-mobile"></i>&ensp;{{ $employee->mobile_phone_number }}
+                            </td>
                             <td>{{ $employee->email }}</td>
-                            <td>{{ $employee->phone_number }}</td>
-                            <td>{{ $employee->mobile_phone_number }}</td>
-                            <td><a class="seats-show-link" href="{{ route('seets.index',[ "dept_id_keyword" => $employee->dept_id]) }}">{{ $employee->seatnumber }}</a></td>
-                            <td>{{ $employee->status }}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -63,46 +69,8 @@
 </div>
 
 <!-- Modal -->
-@include("employees.modal")
+@include("employees.seat-modal")
+@include("employees.employee-modal")
 
 
 @endsection
-
-                {{-- 支社-部署-社員の一覧表示 --}}
-                {{-- <table class="products-table">
-                    <tr>
-                        <th>氏名</th>
-                        <th>ふりがな</th>
-                        <th>所属支社</th>
-                        <th>所属部署</th>
-                        <th>メールアドレス</th>
-                        <th>電話番号</th>
-                        <th>携帯番号</th>
-                        <th>着席位置(seetnumber)</th>
-                        <th>着席状況(status)</th>
-                    </tr>
-                    @if (isset($branches))
-                        @foreach ($branches as $branch)
-                            @foreach ($branch->groups as $group)
-                                @foreach ($group->employees as $employee)
-                                    <tr>
-                                        <td><a class="employees-show-link" href="{{ route('employees.show', $employee->id) }}">{{ $employee->user->name }}
-                                        </td>
-                                        <td>{{ $employee->user->furigana }}</td>
-                                        <td>{{ $employee->所属支社 }}</td>
-                                        <td>{{ $employee->所属部署 }}</td>
-                                        <td>{{ $employee->user->email }}</td>
-                                        <td>{{ $employee->user->phone_number }}</td>
-                                        <td>{{ $employee->user->mobile_phone_number }}</td>
-                                        <td>
-                                            {{ $seatnumber = isset($employee->user->sitdown->seet->seetnumber) ? $employee->user->sitdown->seet->seetnumber : null }}
-                                        </td>
-                                        <td>
-                                            {{ $seatnumber = isset($employee->user->sitdown->status) ? $employee->user->sitdown->status : null }}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endforeach
-                        @endforeach
-                    @endif
-                </table> --}}

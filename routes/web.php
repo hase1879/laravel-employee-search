@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\SitdownController;
 use App\Http\Controllers\SeetController;
 use App\Http\Controllers\TestEmployeeCsvController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TestPagenationController;
-use App\Http\Controllers\TestGitHubController;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ use App\Http\Controllers\TestGitHubController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('top');
 });
 
 Auth::routes(['verify' => true]);
@@ -32,7 +32,6 @@ Route::get('/seets', [SeetController::class, 'index'])->name('seets.index')/*->m
 
 // 座席登録の更新
 Route::get('/seets/{id}/edit', [SeetController::class, 'edit'])->name('seets.edit')/*->middleware(['auth', 'verified'])*/;
-// Route::get('/seets/{id}', [SeetController::class, 'update'])->name('seets.update')->middleware(['auth', 'verified']);
 Route::patch('/seets/{id}', [SeetController::class, 'update_status'])->name('seets.update_status')/*->middleware(['auth', 'verified'])*/;
 
 //座席_着席者の入れ替え deleteする為、getメソッドでデータを取得する。

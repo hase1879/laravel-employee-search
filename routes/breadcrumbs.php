@@ -24,4 +24,9 @@ Breadcrumbs::for('employees.show', function (BreadcrumbTrail $trail, $id) {
     $trail->push('社員詳細', route('employees.show', $id));
 });
 
+Breadcrumbs::for('seets.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('座席表', route('seets.index'));
+});
+
 

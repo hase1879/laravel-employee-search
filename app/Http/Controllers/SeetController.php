@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Logic\SeetIndexLogic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Sitdown;
+// use App\Models\Sitdown;
 use App\Models\Seet;
-use App\Models\User;
-use App\Models\Employee;
-use App\Models\Dept;
-use App\Services\SearchEmployeeService;
-use App\Services\TreeDataEmployeeService;
-use Illuminate\Support\Facades\DB;
+// use App\Models\User;
+// use App\Models\Employee;
+// use App\Models\Dept;
+// use App\Services\SearchEmployeeService;
+// use App\Services\TreeDataEmployeeService;
+// use Illuminate\Support\Facades\DB;
 use App\Services\SeatService;
-use App\Services\MapBoxService;
+// use App\Services\MapBoxService;
 use Exception;
 
 class SeetController extends Controller
@@ -23,7 +23,6 @@ class SeetController extends Controller
 
         //準備: パラメーターの取得  座席表の初期値は"dept_id=1"
         $dept_id_keyword = isset($request->dept_id_keyword) ? $request->dept_id_keyword : 1;
-
 
         return view('seets.index',$logic->search($dept_id_keyword));
 
