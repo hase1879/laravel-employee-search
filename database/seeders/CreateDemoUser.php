@@ -31,7 +31,6 @@ class CreateDemoUser extends Seeder
             ]);
         }
 
-
         dump($user->id);
 
     }

@@ -2,7 +2,13 @@
 
 use Illuminate\Routing\Router;
 use App\Admin\Controllers\UserController;
+use App\Admin\Controllers\SeatController;
 
+// 不要かも？
+// use Illuminate\Support\Facades\Route;
+
+
+// Todo:エラー解消すること
 Admin::routes();
 
 Route::group([

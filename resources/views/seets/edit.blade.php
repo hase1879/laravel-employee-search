@@ -19,7 +19,7 @@
                 <option value="1">着席</option>
                 <option value="2">会議中に変更</option>
                 <option value="3">一時的に離席した</option>
-                <option value="4">離席</option>
+                <option value="-1">離席</option>
             </select><br>
             <button type="submit" class="btn btn-outline-primary btn-sm">着席ステータスを登録。</button>
         </form>

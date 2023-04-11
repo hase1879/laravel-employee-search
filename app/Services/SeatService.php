@@ -9,6 +9,7 @@ use App\Models\User;
 use Exception;
 use Ramsey\Uuid\Type\Integer;
 
+// enum型(php8.1以上対応)
 enum SeatStatusEnum: int
 {
     case 着席 = 1;
@@ -19,6 +20,7 @@ enum SeatStatusEnum: int
 
 class SeatService {
 
+    // 引数→user列データ取得（※状態依存になる為、auth::userとは記載しない。）
     function __construct(private User $user)
     {
 
@@ -99,6 +101,7 @@ class SeatService {
 
         if(!$this->is着席中($user)){
             // throw new Exception("着席していません");
+            // Todo:controllerに記載
             session()->flash('flash_message_notchakuseki', '着席していません');
         } else {
         $着席情報 = Sitdown::where("user_id","=",$user->id)->first();

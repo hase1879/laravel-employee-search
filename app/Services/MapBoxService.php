@@ -3,9 +3,10 @@
 namespace App\Services;
 
 
-// 座席マップ用データに成形
+
 class MapBoxService {
 
+// 座席表データリストの命名
 function __construct(
     public $label,
     public $seat_user,
@@ -19,6 +20,7 @@ function __construct(
 
 }
 
+// 座席アイコン_CSSに読み込めるようにデータ成形
 function toStyle(){
     return "width: {$this->width}px; height: {$this->height}px; top: {$this->top}px; left: {$this->left}px; ";
 }

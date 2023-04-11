@@ -50,6 +50,10 @@
 
                 {{-- 社員一覧ページでのmodal表示箇所 --}}
                 <div class="modal-view">
+                    <style type="text/css">
+                        @import url("{{ asset('css/seat.css') }}");
+                    </style>
+                    <script src="{{ asset("/js/seat.js") }}"></script>
 
                     {{-- タイトル --}}
                     @foreach ($tree as $first_dept=>$second_depts)
@@ -70,6 +74,7 @@
                     {{-- 座席Map画像を表示 --}}
                     <div id="js-map"  class="map"></div>
 
+                    {{-- 座席画像、座席の座標データを取得 --}}
                     <script>
                         $(function(){
                             const box_list = @json($box_list);

@@ -17,10 +17,13 @@
                         <a class="nav-link" href="{{ route('home') }}">ホーム</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('employees.index') }}">社員一覧</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('seets.index') }}">座席表</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('employees.index') }}">社員一覧</a>
+                        <a class="nav-link" href="{{ route('mypage') }}">マイページ</a>
                     </li>
                 </ul>
 

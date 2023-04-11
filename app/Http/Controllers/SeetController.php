@@ -5,16 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Logic\SeetIndexLogic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-// use App\Models\Sitdown;
 use App\Models\Seet;
-// use App\Models\User;
-// use App\Models\Employee;
-// use App\Models\Dept;
-// use App\Services\SearchEmployeeService;
-// use App\Services\TreeDataEmployeeService;
-// use Illuminate\Support\Facades\DB;
 use App\Services\SeatService;
-// use App\Services\MapBoxService;
 use Exception;
 
 class SeetController extends Controller
@@ -25,8 +17,6 @@ class SeetController extends Controller
         $dept_id_keyword = isset($request->dept_id_keyword) ? $request->dept_id_keyword : 1;
 
         return view('seets.index',$logic->search($dept_id_keyword));
-
-
     }
 
     public function edit($id)
@@ -69,46 +59,6 @@ class SeetController extends Controller
     }
 
 
-
-}
-
-
-// 支社名
-class Tree_Branch {
-
-    public $name;
-    public $groups = [];
-
-    function __construct($name){
-        $this->name = $name;
-    }
-
-    function getGroup($bushoName){
-        // groups[$bushoName]がなければ初期化
-        if(!isset($this->groups[$bushoName])){
-            $group = new Tree_Group();
-            $group->name = $bushoName;
-            $this->groups[$bushoName] = $group;
-        }
-        return $this->groups[$bushoName];
-    }
-
-    function addEmployee($employee){
-        $bushoName = $employee->所属部署;
-        $group = $this->getGroup($bushoName);
-        $group->addEmployee($employee);
-    }
-}
-
-// 部署名　foreach内のemployeeを使用
-class Tree_Group {
-
-    public $name;
-    public $employees;
-
-    function addEmployee($employee){
-        $this->employees[] = $employee;
-    }
 
 }
 

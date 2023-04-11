@@ -36,7 +36,6 @@ class SeetIndexLogic {
 
         $employees = Employee::all();
 
-
         foreach($employees as $employee){
             $first_dept = $employee->dept->first_dept;
             $second_dept = $employee->dept->second_dept;
@@ -64,7 +63,7 @@ class SeetIndexLogic {
 
         $box_list = [];
 
-        // 各部署にフロアマップは1つのみ
+        // 座席表データリストの作成
         if(isset($dept->seet)){
             foreach($dept->seet as $seat){
                 $box_list[] = new MapBoxService(
