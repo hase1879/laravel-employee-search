@@ -24,6 +24,11 @@ Route::group([
 
     // ルーティングの設定
     $router->resource('users', UserController::class);
+    $router->resource('depts', DeptController::class);
+    $router->resource('employees', EmployeeController::class);
+    $router->resource('seats', SeetController::class);
+    $router->resource('sitdowns', SitdownController::class);
+
 
     // CSVインポート
     $router->post('users/import', [UserController::class, 'csvImport']);

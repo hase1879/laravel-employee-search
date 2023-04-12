@@ -124,6 +124,32 @@ class AdminTablesSeeder extends Seeder
                 'icon'      => 'fa-history',
                 'uri'       => 'auth/logs',
             ],
+            /**
+             * menuバーを追加
+             */
+            [
+                "parent_id" => 0,
+                "order" => 0,
+                "title" => "User",
+                "icon" => "fa-bars",
+                "uri" => "users",
+            ],
+            [
+                "parent_id" => 0,
+                "order" => 0,
+                "title" => "Dept",
+                "icon" => "fa-bars",
+                "uri" => "dept",
+            ],
+            [
+                "parent_id" => 0,
+                "order" => 0,
+                "title" => "Employee",
+                "icon" => "fa-bars",
+                "uri" => "employees",
+            ],
+
+
         ]);
 
         // add role to menu.
