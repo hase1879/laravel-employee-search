@@ -25,7 +25,7 @@ class EmployeeController extends Controller
             return redirect()->route('home')->with('message', $e->getMessage());
         }
 
-        // カテゴリー用にデータ取得
+        // カテゴリー用にデータ取得a
         $depts = Dept::all()->groupBy('first_dept');
 
         // $status = 1;
