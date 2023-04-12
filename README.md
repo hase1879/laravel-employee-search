@@ -1,3 +1,6 @@
+git fetch origin main
+git merge origin/main
+
 ![TOPページ](https://user-images.githubusercontent.com/117082016/231522042-8600a0a5-4cde-4501-a5b4-d241d069d547.png)
 
 # 制作背景
