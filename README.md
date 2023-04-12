@@ -1,3 +1,4 @@
+![TOPページ](https://user-images.githubusercontent.com/117082016/231522042-8600a0a5-4cde-4501-a5b4-d241d069d547.png)
 
 # 制作背景
 
@@ -9,72 +10,70 @@
 
 そこで、本アプリにて、社員を検索すれば、いち早く、座席位置を割り出すサービスを作成しました。
 
-# **使用技術**
+# 使用技術
 
-### バックエンド
+- バックエンド
+    - Laravel 9.52.0 (PHP 8.1.10)
 
-PHP 8.1.10 / Laravel 9.52.0
+- フロントエンド
+    - HTML / CSS (Bootstrap5)
+    - javascript (jQuery)
 
-### フロントエンド
+- インフラ
+    - mysql
+    - AWS(EC2, S3, RDS, Route 53, ELB, ACM)
 
-HTML / CSS / javascript / Bootstrap5
-
-### インフラ
-
-mysql  / AWS(EC2, S3, RDS, Route 53, ELB, ACM)
-
-### その他の使用技術
-
-git(gitHub) / Visual Studio Code / Drawio(ER図・AWS構成図)
-phpMyadmin(SQLクライアントツール)
+- その他
+    - git(gitHub)
+    - Visual Studio Code
+    - Drawio(ER図・AWS構成図)
+    - phpMyadmin
 
 # 機能一覧
 
-１．トップページ
+- 認証機能
+    - 社員登録
+    - ログイン/ログアウト
+    - ゲストログイン
 
-２．ホームページ
+- 社員名簿
+    - 社員一覧表示
+    - 社員検索機能
+    - 社員詳細表示
 
-３．社員一覧
+- 座席表表示
+    - 座席表表示
+    - 座席表検索機能
+    - 着席ステータス更新機能
 
-- ３－１－１．社員一覧を**表形式**で表示（Grid.js）
+- マイページ機能
+    - 退会機能（未実装）
+    - 社員情報変更
+    - パスワード変更
 
-- ３－１－２．各種詳細が**モーダルウィンドウ**表示（Bootstrap＋jQuery(＋Grid.js)）
-
-- ３－１－３．サイドメニューで**部署の絞り込み**
-
-- ３－１－４．絞り込んだ部署に社員がいない時に、エラー表示（**例外処理**）
-
-４．座席表
-
-５．マイページ
-
-1. アカウント登録機能
-2. アカウント削除機能(未)(LaravelAdmin)
-3. ログイン機能
-4. ゲストユーザーログイン機能
-5. ログアウト機能
-6. 社員名簿検索機能(Grid.js)
-7. 社員追加機能(LaravelAdmin)
-8. 社員名簿ソート機能(CRUD)
-9. 社員名簿一覧(CRUD)
-10. 社員詳細モーダル表示機能(Bootstrap,jQuery)
-11. 座席詳細モーダル表示機能(Bootstrap,jQuery)
-12. 座席表検索機能(CRUD)
-13. 座席表表示機能(CRUD)
-14. 座席者表示機能(CRUD)
-15. マイページ編集機能(CRUD)
-
+- 管理画面
+    - 認証機能
+    - 社員情報の一覧表示
+    - 社員情報の追加
 
 # **ER 図**
-
-![136C4944-1A3B-4FB7-9D05-DDDB0CE3D67F.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f0f5f024-d4eb-445c-86d4-efd6ba7ac73b/136C4944-1A3B-4FB7-9D05-DDDB0CE3D67F.png)
-
 # **インフラ構成図**
 
-![C25C6DED-257E-42B5-90AC-04588E90B0E2.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0839f72b-9184-41c4-bf39-a9d579973c19/C25C6DED-257E-42B5-90AC-04588E90B0E2.png)
-
-
 # **何ができるのか**
+
+### **-目次-**
+
+１．トップページ
+
+２．ユーザー認証
+
+３．社員名簿からある社員の着席位置を検索
+- ３－１．社員名簿ページ
+    - ３－１－１．社員一覧を**表形式**で表示（Grid.js）
+    - ３－１－２．各種詳細が**モーダルウィンドウ**表示（Bootstrap＋jQuery(＋Grid.js)）
+    - ３－１－３．サイドメニューで**部署の絞り込み**
+    - ３－１－４．絞り込んだ部署に社員がいない時に、エラー表示（**例外処理**）
+- ３－２．座席表
 
 ## １．トップページ
 
