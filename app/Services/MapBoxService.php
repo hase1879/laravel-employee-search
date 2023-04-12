@@ -4,25 +4,38 @@ namespace App\Services;
 
 
 
-class MapBoxService {
+class MapBoxService
+{
 
-// 座席表データリストの命名
-function __construct(
-    public $label,
-    public $seat_user,
-    public $width,
-    public $height,
-    public $top,
-    public $left,
-    public $status,
-    public $seet_id,
-){
+    // 座席表データリストの命名
+    function __construct(
+        public $label,
+        public $seat_user,
+        public $width,
+        public $height,
+        public $top,
+        public $left,
+        public $status,
+        public $seet_id,
+    ) {
+    }
 
-}
+    // 座席アイコン_CSSに読み込めるようにデータ成形
+    function toStyle()
+    {
+        $styles = [
+            "width" => $this->width . "px",
+            "height" => $this->height . "px",
+            "top" => $this->top . "px",
+            "left" => $this->left . "px",
+        ];
 
-// 座席アイコン_CSSに読み込めるようにデータ成形
-function toStyle(){
-    return "width: {$this->width}px; height: {$this->height}px; top: {$this->top}px; left: {$this->left}px; ";
-}
+        $ret = [];
+        foreach($styles as $key => $value){
+            $ret[] = $key . ": " . $value;
+        }
+        return implode(";", $ret);
 
+        //return "width: {$this->width}px; height: {$this->height}px; top: {$this->top}px; left: {$this->left}px; ";
+    }
 }

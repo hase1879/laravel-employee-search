@@ -52,7 +52,7 @@ class UserController extends AdminController
         $grid->column('created_at', __('Created at'))->sortable();
         $grid->column('updated_at', __('Updated at'))->sortable();
 
-        $grid->filter(function($filter){
+        $grid->filter(function ($filter) {
             $filter->like('name', '氏名');
             $filter->between('created_at', '登録日')->datetime();
         });
@@ -69,7 +69,12 @@ class UserController extends AdminController
     public function csvImport(Request $request)
     {
         $file = $request->file('file');
+
+
         $lexer_config = new LexerConfig();
+
+        $lexer_config->setIgnoreHeaderLine(true);
+
         $lexer = new Lexer($lexer_config);
 
         $interpreter = new Interpreter();
@@ -80,30 +85,53 @@ class UserController extends AdminController
             $rows[] = $row;
         });
 
+        $counts = [
+            "create" => 0,
+            "skip" => 0,
+            "__debug" => []
+        ];
+
         $lexer->parse($file, $interpreter);
         foreach ($rows as $key => $value) {
 
-            if (count($value) == 13) {
-                User::create([
-                    'profile_picture' => $value[0],
-                    'user_number' => $value[1],
-                    'name' => $value[2],
-                    'furigana' => $value[3],
-                    'age' => $value[4],
-                    'date_of_Birth' => $value[5],
-                    'join_date' => $value[6],
-                    'gender' => $value[7],
-                    'email' => $value[8],
-                    'phone_number' => $value[9],
-                    'mobile_phone_number' => $value[10],
-                    'zip_code' => $value[11],
-                    'present_address' => $value[12],
-                ]);
+            //CSVの項目数✅
+            if (count($value) < 16) {
+                continue;
             }
+
+            //名前が入力されていないデータを省く
+            if (strlen($value[2]) < 1) {
+                continue;
+            }
+
+            //メールアドレスの重複✅
+            $isExist = User::where('email',"=",$value[8])->first();
+            if ($isExist) {
+                continue;
+            }
+
+            User::create([
+                'profile_picture' => $value[0],
+                'user_number' => $value[1],
+                'name' => $value[2],
+                'furigana' => $value[3],
+                'age' => $value[4],
+                'date_of_Birth' => $value[5],
+                'join_date' => $value[6],
+                'gender' => $value[7],
+                'email' => $value[8],
+                'phone_number' => $value[9],
+                'mobile_phone_number' => $value[10],
+                'zip_code' => $value[11],
+                'present_address' => $value[12],
+                'password' => $value[15],
+            ]);
+            $counts["create"]++;
+
         }
 
         return response()->json(
-            ['data' => '成功'],
+            ['data' => '成功', 'counts' => $counts],
             200,
             [],
             JSON_UNESCAPED_UNICODE
