@@ -11,50 +11,52 @@ use App\Enums\SeatStatusEnum;
 use Exception;
 use Ramsey\Uuid\Type\Integer;
 
-class SeatService {
+class SeatService
+{
 
     // 引数→user列データ取得（※状態依存になる為、auth::userとは記載しない。）
     function __construct(private User $user)
     {
-
     }
 
-    function updateStatus(Seet $seat, $status_number){
+    function updateStatus(Seet $seat, $status_number)
+    {
 
         $status = SeatStatusEnum::from($status_number);
 
-        if ($status == SeatStatusEnum::着席){
+        if ($status == SeatStatusEnum::着席) {
             $this->着席($this->user, $seat);
-        }elseif ($status == SeatStatusEnum::会議中){
+        } elseif ($status == SeatStatusEnum::会議中) {
             $this->会議中に変更($this->user, $seat);
-        }elseif ($status == SeatStatusEnum::一時離席){
+        } elseif ($status == SeatStatusEnum::一時離席) {
             $this->一時的に離席した($this->user, $seat);
-        }else{
+        } else {
             $this->離席($this->user, $seat);
         }
-
     }
 
-    function is着席中(User $user) : Bool {
+    function is着席中(User $user): Bool
+    {
 
-        $着席情報 = Sitdown::where("user_id","=",$user->id)->first();
-        if(is_null($着席情報)){
+        $着席情報 = Sitdown::where("user_id", "=", $user->id)->first();
+        if (is_null($着席情報)) {
             return false;
         }
 
         return true;
     }
 
-    function 着席(User $user, Seet $seat){
+    function 着席(User $user, Seet $seat)
+    {
 
-        $着席情報 = Sitdown::where("user_id","=",$user->id)->first();
-        if(is_null($着席情報)){
+        $着席情報 = Sitdown::where("user_id", "=", $user->id)->first();
+        if (is_null($着席情報)) {
             $着席情報 = new Sitdown();
         }
 
         // 例外処理
-        $seat_user = Sitdown::where("seet_id","=",$seat->id)->first();
-        if(isset($seat_user)){
+        $seat_user = Sitdown::where("seet_id", "=", $seat->id)->first();
+        if (isset($seat_user)) {
             throw new Exception("既に座っている人がいますが、着席しますか？");
         }
 
@@ -66,40 +68,42 @@ class SeatService {
         //$着席情報 = Sitdown::where("user_id","=",$user->id)->firstOrNew();
     }
 
-    function 会議中に変更(User $user){
+    function 会議中に変更(User $user)
+    {
 
-        if(!$this->is着席中($user)){
+        if (!$this->is着席中($user)) {
             // throw new Exception("着席していません");
             session()->flash('flash_message_notchakuseki', '着席していません');
-        }else{
-        $着席情報 = Sitdown::where("user_id","=",$user->id)->first();
-        $着席情報->status = Sitdown::STATUS_KAIGI;
-        $着席情報->save();
+        } else {
+            $着席情報 = Sitdown::where("user_id", "=", $user->id)->first();
+            $着席情報->status = Sitdown::STATUS_KAIGI;
+            $着席情報->save();
         }
     }
 
-    function 一時的に離席した(User $user){
+    function 一時的に離席した(User $user)
+    {
 
-        if(!$this->is着席中($user)){
+        if (!$this->is着席中($user)) {
             // throw new Exception("着席していません");
             session()->flash('flash_message_notchakuseki', '着席していません');
-        }else{
-        $着席情報 = Sitdown::where("user_id","=",$user->id)->first();
-        $着席情報->status = Sitdown::STATUS_RISEKI;
-        $着席情報->save();
+        } else {
+            $着席情報 = Sitdown::where("user_id", "=", $user->id)->first();
+            $着席情報->status = Sitdown::STATUS_RISEKI;
+            $着席情報->save();
         }
     }
 
-    function 離席(User $user){
+    function 離席(User $user)
+    {
 
-        if(!$this->is着席中($user)){
+        if (!$this->is着席中($user)) {
             // throw new Exception("着席していません");
             // Todo:controllerに記載
             session()->flash('flash_message_notchakuseki', '着席していません');
         } else {
-        $着席情報 = Sitdown::where("user_id","=",$user->id)->first();
-        $着席情報->delete();
+            $着席情報 = Sitdown::where("user_id", "=", $user->id)->first();
+            $着席情報->delete();
         }
     }
-
 }

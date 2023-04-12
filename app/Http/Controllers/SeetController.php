@@ -7,21 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Seet;
 use App\Services\SeatService;
-use App\Enums\SeatStatusEnum;
 use Exception;
 
 class SeetController extends Controller
 {
-    public function index(Request $request, SeetIndexLogic $logic){
+    public function index(Request $request, SeetIndexLogic $logic)
+    {
 
         //準備: パラメーターの取得  座席表の初期値は"dept_id=1"
         $dept_id_keyword = isset($request->dept_id_keyword) ? $request->dept_id_keyword : 1;
 
-        // $label = SeatStatusEnum::着席->label(); // 本
-        // dd($label);
-
-
-        return view('seets.index',$logic->search($dept_id_keyword));
+        return view('seets.index', $logic->search($dept_id_keyword));
     }
 
     public function edit($id)
@@ -35,10 +31,10 @@ class SeetController extends Controller
         $seat = Seet::find($id);
         $status_number = $request->input('status_number');
 
-        try{
+        try {
             $service = new SeatService(Auth::user());
             $service->updateStatus($seat, $status_number);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()
                 ->route('seets.index')
                 ->with([
@@ -47,25 +43,22 @@ class SeetController extends Controller
                 ]);
         }
 
-
-
-
         // try-catchでエラーを全てステータス更新ページに遷移
         return redirect()->route('seets.index');
     }
 
-    public function update_chakuseki($id) {
+    public function update_chakuseki($id)
+    {
         $seat = Seet::find($id);
-        $seat->sitdown->delete();
-        $user = Auth::user();
 
+        // 選択した着席情報を削除
+        $seat->sitdown->delete();
+
+        // ログインユーザーの着席情報をsitdownテーブルに保存
+        $user = Auth::user();
         $service = new SeatService($user);
         $service->着席($user, $seat);
 
         return redirect()->route('seets.index')->with('sitdown_delete_message', '着席情報を更新しました。');
     }
-
-
-
 }
-
