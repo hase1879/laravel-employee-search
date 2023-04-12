@@ -619,8 +619,137 @@ enum SeatStatusEnum: int
 ```
 
 ###  ５．管理画面
+![230413_管理画面の検索とCSV](https://user-images.githubusercontent.com/117082016/231552635-42e37564-29bc-42e5-8741-16493deec884.gif)
 
 
+```php
+【コード概要】
+
+
+=============================================================================
+
+●app\Admin\Controllers\UserController.php
+    // CSVデータ
+    public function csvImport(Request $request)
+    {
+        $file = $request->file('file');
+
+
+        $lexer_config = new LexerConfig();
+
+        $lexer_config->setIgnoreHeaderLine(true);
+
+        $lexer = new Lexer($lexer_config);
+
+        $interpreter = new Interpreter();
+        $interpreter->unstrict();
+
+        $rows = array();
+        $interpreter->addObserver(function (array $row) use (&$rows) {
+            $rows[] = $row;
+        });
+
+        $counts = [
+            "create" => 0,
+            "skip" => 0,
+            "__debug" => []
+        ];
+
+        $lexer->parse($file, $interpreter);
+        foreach ($rows as $key => $value) {
+
+            //CSVの項目数チェック
+            if (count($value) < 16) {
+                continue;
+            }
+
+            //名前が入力されていないデータを省く
+            if (strlen($value[2]) < 1) {
+                continue;
+            }
+
+            //メールアドレスの重複チェック
+            $isExist = User::where('email',"=",$value[8])->first();
+            if ($isExist) {
+                continue;
+            }
+
+            User::create([
+                'profile_picture' => $value[0],
+                'user_number' => $value[1],
+                'name' => $value[2],
+                'furigana' => $value[3],
+                'age' => $value[4],
+                'date_of_Birth' => $value[5],
+                'join_date' => $value[6],
+                'gender' => $value[7],
+                'email' => $value[8],
+                'phone_number' => $value[9],
+                'mobile_phone_number' => $value[10],
+                'zip_code' => $value[11],
+                'present_address' => $value[12],
+                'password' => $value[15],
+            ]);
+            $counts["create"]++;
+
+        }
+
+        return response()->json(
+            ['data' => '成功', 'counts' => $counts],
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE
+        );
+    }
+
+●app\Admin\Extensions\Tools\CsvImport.php
+    class CsvImport extends AbstractTool
+     {
+         protected function script()
+         {
+             return <<< SCRIPT
+
+             //  「CSVインポート」をクリック時
+             $('.csv-import').click(function() {
+                 var select = document.getElementById('files');
+                 document.getElementById("files").click();
+                 select.addEventListener('change',function() {
+                     var formdata = new FormData();
+                     formdata.append( "file", $("input[name='user']").prop("files")[0] );
+
+                    // Ajaxリクエストを送信する前に、共通の設定
+                     $.ajaxSetup({
+                         headers: {
+                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                         }
+                     });
+
+                     // Ajaxリクエストを送信
+                     $.ajax({
+                         type : "POST",
+                         url : "users/import",
+                         data : formdata,
+                         processData : false,
+                         contentType : false,
+                         success: function (response) {
+                             $.pjax.reload("#pjax-container");
+                             toastr.success('CSVのアップロードが成功しました');
+                         }
+                     });
+                 });
+             });
+
+             SCRIPT;
+         }
+
+         public function render()
+         {
+             Admin::script($this->script());
+             return view('csv_upload');
+         }
+     }
+
+```
 
 
 
