@@ -73,7 +73,11 @@
     - ３－１－２．各種詳細が**モーダルウィンドウ**表示（Bootstrap＋jQuery(＋Grid.js)）
     - ３－１－３．サイドメニューで**部署の絞り込み**
     - ３－１－４．絞り込んだ部署に社員がいない時に、エラー表示（**例外処理**）
-- ３－２．座席表
+- ３－２．座席表ページ
+
+４．管理画面ページ
+
+５．マイページ
 
 ## １．トップページ
 
@@ -88,23 +92,17 @@
 - 登録時、メールアドレスと連携して登録されます。
 - ユーザー登録の有無を判別し、ログインページへリダイレクトかけます。
 
-## ３．社員の着席位置を検索
 
-1. 社員一覧ページにて、「部署のカテゴリによる絞り込み / キーワード検索」から該当の社員を　　検索。（参考：３－１．社員一覧ページ）
-2. 該当の座席表ページがモーダルウィンドウで表示され、着席位置を確認できる。（参考：３－２．座席表ページ）
 
-## ３－１．社員一覧ページ
+## ３．社員の着席位置を検索（社員一覧ページ）
+- 社員一覧ページにて、「部署のカテゴリによる絞り込み / キーワード検索」から該当の社員を　　検索。（参考：３－１．社員一覧ページ）
+- 該当の座席表ページがモーダルウィンドウで表示され、着席位置を確認できる。（参考：３－２．座席表ページ）
 
-３－１－１．社員一覧を**表形式**で表示（Grid.js）
+![230413_社員検索から座席表](https://user-images.githubusercontent.com/117082016/231530571-d1e57473-0a69-46e4-8a74-1f2afb4c93dc.gif)
 
-３－１－２．各種詳細が**モーダルウィンドウ**表示（Bootstrap＋jQuery(＋Grid.js)）
 
-３－１－３．サイドメニューで**部署の絞り込み**
 
-３－１－４．絞り込んだ部署に社員がいない時に、エラー表示（**例外処理**）
-<img width="513" alt="社員一覧ページ" src="https://user-images.githubusercontent.com/117082016/231432041-432c7dbe-9f8e-4278-8225-0cf9cfb3e7f6.png">
-
-### ３－１－１．社員一覧を**表形式**で表示（Grid.js）
+### ３－１．社員一覧を**表形式**で表示（Grid.js）
 
 (1) Grid.jsを使用し、社員一覧表を表示。
 (2) クリックするとモーダル表示
@@ -181,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 ```
 
-### ３－１－２．各種詳細が**モーダルウィンドウ**表示（Bootstrap＋jQuery(＋Grid.js)）
+### ３－２．各種詳細が**モーダルウィンドウ**表示（Bootstrap＋jQuery(＋Grid.js)）
 
 ※【気をつけたこと】動的に取得したデータの為（Grid.jsでレンダリング）、イベントをルート要素を対象にした。
 
@@ -241,7 +239,7 @@ function openModalSeat(url){
 ```
 
 
-### ３－１－３．サイドメニューで**部署の絞り込み**
+### ３－３．サイドメニューで**部署の絞り込み**
 
 (1) 部署カテゴリーをクリック。
 
@@ -336,11 +334,9 @@ class EmployeeInfoService {
 
 # ４．座席表ページ
 
-- 各課の座席表ページが表示される。
-- サイドメニューから表示したい部署で絞り込みかけると、
-    
-    「該当部署の社員・座席表」が表示される。
-    
+- 各部署の座席表ページが表示されます。
+  <br>サイドメニューから表示したい部署で絞り込みかけると、
+  <br>「該当部署の社員・座席表」が表示されます。
 - 着席状況はアイコンの色を分け、視覚的に把握しやすくしました。
 - 座席をクリックすると、着席の状況を変更できます。（参照：４－１．着席ステータス更新）
 
@@ -348,19 +344,19 @@ class EmployeeInfoService {
 
 【コード概要】
 
-保守性の良いコードとなるように努めた。下記コードでは、ドメイン駆動開発（DDD）の考え方を意識し、
-Controllerから、ビジネスロジックを担当するクラスを、切り離した。
-また、クラス内に、複数の役割を持たないようにした。
-さらに、DTOの考えから、データは成形し、ひとまとめにした後、view側に渡した。
+保守性の良いコードとなるように努めました。ドメイン駆動開発（DDD）の考え方を意識し、
+Controllerから、ビジネスロジックを担当するクラスを、切り離しました。
+また、クラス内に、複数の役割を持たないようにし、
+DTOの考えから、データは成形し、ひとまとめにした後、view側に渡すようにした。
 
 具体的には、
-SeetIndexLogicに、
-①メインロジック(1) Treeの構築
-　→サイドメニューに、部署1-部署2-社員情報を表示する為に、データを取得
-②メインロジック(2) 座席情報の構築
-　→座席表を構築するデータを取得
-更に、座席BOXを作成する座標データを、CSSに読み込めるように、成形するロジックを、
-MapBoxServiceに切り分けている。
+<br>SeetIndexLogicに、
+- メインロジック(1) Treeの構築
+    - サイドメニューに、部署1-部署2-社員情報を表示する為に、データを取得
+- メインロジック(2) 座席情報の構築
+    - 座席表を構築するデータを取得
+<br>更に、座席BOXを作成する座標データを、CSSに読み込めるように、成形するロジックを、<br>
+<br>MapBoxServiceに切り分けている。
 =======================================================================================
 
 
@@ -467,75 +463,87 @@ class SeetIndexLogic {
 
 ```
 
-### ４－１．着席ステータス更新
 
-①座席をクリックすると、ログインユーザーの着席ステータスを変更する。
+
+
+### ４－１．着席ステータス更新
+- 座席をクリックすると、ログインユーザーの着席ステータスを変更する。
+![230409_着席に更新](https://user-images.githubusercontent.com/117082016/231535246-190ed6e6-e8c2-4299-a17a-e78f468f0089.gif)
 
 ```php
 
 【コード概要】
-①viewから、get通信で着席ステータス（着席・会議中・一時離席・離席）をSeetControllerで受け取る。
-Sitdownテーブルにある、着席ステータス情報を、SeatServiceで処理し、
+①seets/edit.blade.phpから、get通信で着席ステータス（着席・会議中・一時離席・離席）が送信され
+SeetControllerで受け取る。
+Sitdownsテーブルにある、着席ステータス情報を、SeatServiceで処理し、
 更新していく。
 
-※enum型を使用し、着席ステータスを列挙して記載し、if文での分岐時には、
-マジックナンバー化しないように、注意した。
+※php8.1からデフォルトに導入された、enum型を使用し、着席ステータスがマジックナンバー化しないように、注意した。
 =========================================================
 
-●app\Services\SeatService.php
-// enum型(php8.1以上対応)
-enum SeatStatusEnum: int
-{
-    case 着席 = 1;
-    case 会議中 = 2;
-    case 一時離席 = 3;
-    case 離席 = -1;
-}
+●app\Http\Controllers\SeetController.php
+    public function update_chakuseki($id)
+    {
+        $seat = Seet::find($id);
 
-class SeatService {
+        // 選択した着席情報を削除
+        $seat->sitdown->delete();
+
+        // ログインユーザーの着席情報をsitdownテーブルに保存
+        $user = Auth::user();
+        $service = new SeatService($user);
+        $service->着席($user, $seat);
+
+        return redirect()->route('seets.index')->with('sitdown_delete_message', '着席情報を更新しました。');
+    }
+
+●app\Services\SeatService.php
+class SeatService
+{
 
     // 引数→user列データ取得（※状態依存になる為、auth::userとは記載しない。）
     function __construct(private User $user)
     {
-
     }
 
-    function updateStatus(Seet $seat, $status_number){
+    function updateStatus(Seet $seat, $status_number)
+    {
 
         $status = SeatStatusEnum::from($status_number);
 
-        if ($status == SeatStatusEnum::着席){
+        if ($status == SeatStatusEnum::着席) {
             $this->着席($this->user, $seat);
-        }elseif ($status == SeatStatusEnum::会議中){
+        } elseif ($status == SeatStatusEnum::会議中) {
             $this->会議中に変更($this->user, $seat);
-        }elseif ($status == SeatStatusEnum::一時離席){
+        } elseif ($status == SeatStatusEnum::一時離席) {
             $this->一時的に離席した($this->user, $seat);
-        }else{
+        } else {
             $this->離席($this->user, $seat);
         }
-
     }
 
-    function is着席中(User $user) : Bool {
+    function is着席中(User $user): Bool
+    {
 
-        $着席情報 = Sitdown::where("user_id","=",$user->id)->first();
-        if(is_null($着席情報)){
+        $着席情報 = Sitdown::where("user_id", "=", $user->id)->first();
+        if (is_null($着席情報)) {
             return false;
         }
 
         return true;
     }
 
-    function 着席(User $user, Seet $seat){
+    function 着席(User $user, Seet $seat)
+    {
 
-        $着席情報 = Sitdown::where("user_id","=",$user->id)->first();
-        if(is_null($着席情報)){
+        $着席情報 = Sitdown::where("user_id", "=", $user->id)->first();
+        if (is_null($着席情報)) {
             $着席情報 = new Sitdown();
         }
 
         // 例外処理
-        $seat_user = Sitdown::where("seet_id","=",$seat->id)->first();
-        if(isset($seat_user)){
+        $seat_user = Sitdown::where("seet_id", "=", $seat->id)->first();
+        if (isset($seat_user)) {
             throw new Exception("既に座っている人がいますが、着席しますか？");
         }
 
@@ -543,75 +551,72 @@ class SeatService {
         $着席情報->seet_id = $seat->id;
         $着席情報->status = Sitdown::STATUS_CHAKUSEKI;
         $着席情報->save();
-
-        //$着席情報 = Sitdown::where("user_id","=",$user->id)->firstOrNew();
     }
 
-    function 会議中に変更(User $user){
+    function 会議中に変更(User $user)
+    {
 
-        if(!$this->is着席中($user)){
-            // throw new Exception("着席していません");
-            session()->flash('flash_message_notchakuseki', '着席していません');
-        }else{
-        $着席情報 = Sitdown::where("user_id","=",$user->id)->first();
-        $着席情報->status = Sitdown::STATUS_KAIGI;
-        $着席情報->save();
-        }
-    }
-
-    function 一時的に離席した(User $user){
-
-        if(!$this->is着席中($user)){
-            // throw new Exception("着席していません");
-            session()->flash('flash_message_notchakuseki', '着席していません');
-        }else{
-        $着席情報 = Sitdown::where("user_id","=",$user->id)->first();
-        $着席情報->status = Sitdown::STATUS_RISEKI;
-        $着席情報->save();
-        }
-    }
-
-    function 離席(User $user){
-
-        if(!$this->is着席中($user)){
-            // throw new Exception("着席していません");
-            // Todo:controllerに記載
+        if (!$this->is着席中($user)) {
             session()->flash('flash_message_notchakuseki', '着席していません');
         } else {
-        $着席情報 = Sitdown::where("user_id","=",$user->id)->first();
-        $着席情報->delete();
+            $着席情報 = Sitdown::where("user_id", "=", $user->id)->first();
+            $着席情報->status = Sitdown::STATUS_KAIGI;
+            $着席情報->save();
         }
     }
 
+    function 一時的に離席した(User $user)
+    {
+
+        if (!$this->is着席中($user)) {
+            session()->flash('flash_message_notchakuseki', '着席していません');
+        } else {
+            $着席情報 = Sitdown::where("user_id", "=", $user->id)->first();
+            $着席情報->status = Sitdown::STATUS_RISEKI;
+            $着席情報->save();
+        }
+    }
+
+    function 離席(User $user)
+    {
+
+        if (!$this->is着席中($user)) {
+            session()->flash('flash_message_notchakuseki', '着席していません');
+        } else {
+            $着席情報 = Sitdown::where("user_id", "=", $user->id)->first();
+            $着席情報->delete();
+        }
+    }
 }
 
-●seets/sidemenu
-<td class="seat-info"  cellpadding="1">
-    {{$seatnumber = isset( $employee->user->sitdown->seet->seetnumber ) ? $employee->user->sitdown->seet->seetnumber : "－"}}
-:&nbsp;
+●app\Enums
 
-@if(isset( $employee->user->sitdown->status  ))
-    @switch ($employee->user->sitdown->status)
-        @case(1)
-            着席
-            @break
-        @case(2)
-            会議中
-            @break
-        @case(3)
-            会議中
-            @break
-        @default
-            離席
-            @break;
-    @endswitch
-@endif
-</td>
+// php8.1以上対応
+enum SeatStatusEnum: int
+{
+    case 着席 = 1;
+    case 会議中 = 2;
+    case 一時離席 = 3;
+    case 離席 = -1;
+
+        // 日本語を追加
+        public function label(): string
+        {
+            return match($this)
+            {
+                SeatStatusEnum::着席 => '着席',
+                SeatStatusEnum::会議中 => '会議中',
+                SeatStatusEnum::一時離席 => '一時離席',
+                SeatStatusEnum::離席 => '離席',
+            };
+        }
+}
 
 
 ```
 
 ###  ５．管理画面
+
 
 
 
