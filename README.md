@@ -148,8 +148,82 @@ phpMyadmin(SQLクライアントツール)
 ３－１－３．サイドメニューで**部署の絞り込み**
 
 ３－１－４．絞り込んだ部署に社員がいない時に、エラー表示（**例外処理**）
+<img width="513" alt="社員一覧ページ" src="https://user-images.githubusercontent.com/117082016/231432041-432c7dbe-9f8e-4278-8225-0cf9cfb3e7f6.png">
+
+### ３－１－１．社員一覧を**表形式**で表示（Grid.js）
+
+①Grid.jsを使用し、社員一覧表を表示。
+②クリックするとモーダル表示
+
+```php
 
 
+*【コード概要】*
+DOMのリロード後、
+	①HTMLのtable要素からデータ取得（jQuery）
+	②Grid.jsにてデータ成形。
+	③HTMLにデータを戻し、表示。
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+●resources\view\seets
+
+{{-- grid.jsにて再出力 --}}
+<div id="sample-table-wrapper"></div>
+
+{{-- 
+・テーブルデータ
+・Grid.jsでレンダリングするので"display:none;"とする
+--}}
+<table id="sample-table" style="display:none;">
+    <thead>
+        <tr>
+            <th>氏名</th>
+						～省略～                     
+    </thead>
+    <tbody>
+        @foreach($employee_list as $employee)
+        <tr>
+            <td><a class="employees-show-link" href="{{ route('employees.show', $employee->id) }}">{{ $employee->name }}</a></td>
+            ～省略～
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+
+●public\js\employee-grid.js
+
+// DOM読み込み後、ルート要素（document）からtableタグを取得
+document.addEventListener('DOMContentLoaded', function () {
+		//Grid.jsを用いた表データの作成
+		const grid = new gridjs.Grid({
+					// table要素を取得
+          from: document.getElementById("sample-table"),
+					// データ成形
+          pagination: {
+              limit: 10
+          },
+          search: true,
+          sort: true,
+          fixedHeader: true,
+          height: '700px',
+          style: {
+              td: {
+                  border: '1px solid #ccc',
+              },
+              th: {
+                  color: "rgb(0, 0, 0)",
+                  border: '1px solid #ccc',
+                  'background-color': 'rgba(93, 193, 255, 0.267)',
+              },
+              table: {
+                  'font-size': '15px',
+                  'white-space': 'nowrap'
+              }
+          }
+		// HTMLの"sample-table-wrapper"へ出力
+    }).render(document.getElementById("sample-table-wrapper"));
+});
 
 
+```
 
