@@ -73,6 +73,7 @@ class UserController extends AdminController
 
         $lexer_config = new LexerConfig();
 
+        // 1行目をスキップ
         $lexer_config->setIgnoreHeaderLine(true);
 
         $lexer = new Lexer($lexer_config);
@@ -94,7 +95,7 @@ class UserController extends AdminController
         $lexer->parse($file, $interpreter);
         foreach ($rows as $key => $value) {
 
-            //CSVの項目数✅
+            //CSVの項目数チェック
             if (count($value) < 16) {
                 continue;
             }
@@ -104,7 +105,7 @@ class UserController extends AdminController
                 continue;
             }
 
-            //メールアドレスの重複✅
+            //メールアドレスの重複チェック
             $isExist = User::where('email',"=",$value[8])->first();
             if ($isExist) {
                 continue;
