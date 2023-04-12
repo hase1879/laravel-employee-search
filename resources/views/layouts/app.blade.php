@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="img/favicon.ico">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -33,12 +34,6 @@
 
     {{-- ログイン画面_CSS --}}
     <link rel="stylesheet" href="{{ asset('/css/login.css') }}">
-
-    {{-- Fontawesome_CSS --}}
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"> --}}
-
-    {{-- CSSファイル読み込み --}}
-    {{-- <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" > --}}
     <style>
 
         main {
@@ -60,7 +55,6 @@
             outline: none;
             background: transparent;
             font-weight: bold;
-
         }
 
     </style>

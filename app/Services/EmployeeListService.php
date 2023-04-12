@@ -4,10 +4,15 @@ namespace App\Services;
 
 use Exception;
 
+use App\Services\SeatStatusNameService;
+
 // 社員一覧表用のデータリストを作成
 class EmployeeListService {
 
 function employeeList($employees,$dept_keyword){
+
+
+
 
     foreach($employees as $employee){
         $first_dept = $employee->dept->first_dept;
@@ -19,6 +24,12 @@ function employeeList($employees,$dept_keyword){
         if($dept_keyword && (array_search($dept_keyword, $array)) === false){
             continue;
         }
+
+
+        // 着席ステータスを文字で取得
+        $service = new SeatStatusNameService;
+        $statusNumber = isset($employee->user->sitdown->status) ? $employee->user->sitdown->status : -1;
+        $status = $service->seatStatusName($statusNumber);
 
         // Formによる絞り込み後の、必要データのみ取得
         $employee_list[] = new EmployeeInfoService (
@@ -32,10 +43,11 @@ function employeeList($employees,$dept_keyword){
             $employee->user->phone_number,
             $employee->user->mobile_phone_number,
             $seatnumber = isset($employee->user->sitdown->seet->seetnumber) ? $employee->user->sitdown->seet->seetnumber : "離席",
-            $status = isset($employee->user->sitdown->status) ? $employee->user->sitdown->status : "-",
+            $status,
             $employee->dept->id,
         );
     }
+
 
     // 例外処理
     if(!isset($employee_list)){
@@ -46,3 +58,5 @@ function employeeList($employees,$dept_keyword){
     }
 
 }
+
+

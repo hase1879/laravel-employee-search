@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Seet;
 use App\Services\SeatService;
+use App\Enums\SeatStatusEnum;
 use Exception;
 
 class SeetController extends Controller
@@ -15,6 +16,10 @@ class SeetController extends Controller
 
         //準備: パラメーターの取得  座席表の初期値は"dept_id=1"
         $dept_id_keyword = isset($request->dept_id_keyword) ? $request->dept_id_keyword : 1;
+
+        // $label = SeatStatusEnum::着席->label(); // 本
+        // dd($label);
+
 
         return view('seets.index',$logic->search($dept_id_keyword));
     }
@@ -41,6 +46,8 @@ class SeetController extends Controller
                     'delete_seat_id' => $seat->id
                 ]);
         }
+
+
 
 
         // try-catchでエラーを全てステータス更新ページに遷移

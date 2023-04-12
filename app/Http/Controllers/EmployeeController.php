@@ -7,10 +7,10 @@ use App\Models\Dept;
 use Illuminate\Http\Request;
 use App\Services\EmployeeListService;
 use Exception;
+use App\Services\SeatStatusNameService;
 
 class EmployeeController extends Controller
 {
-
     public function index(Request $request)
     {
         // 社員一覧表用データの取得
@@ -28,6 +28,13 @@ class EmployeeController extends Controller
         // カテゴリー用にデータ取得
         $depts = Dept::all()->groupBy('first_dept');
 
+        // $status = 1;
+        // $service = new SeatStatusNameService;
+        // $statusName = $service->seatStatusName($status);
+        // dd($statusName);
+
+
+
         return view('employees.index', compact('employee_list', 'depts'));
     }
 
@@ -37,6 +44,8 @@ class EmployeeController extends Controller
 
         return view('employees.show', compact('employee'));
     }
+
+
 }
 
 

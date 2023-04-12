@@ -5,18 +5,11 @@ namespace App\Services;
 use App\Models\Seet;
 use App\Models\Sitdown;
 use App\Models\User;
+use App\Enums\SeatStatusEnum;
+
 // 例外処理用
 use Exception;
 use Ramsey\Uuid\Type\Integer;
-
-// enum型(php8.1以上対応)
-enum SeatStatusEnum: int
-{
-    case 着席 = 1;
-    case 会議中 = 2;
-    case 一時離席 = 3;
-    case 離席 = -1;
-}
 
 class SeatService {
 
