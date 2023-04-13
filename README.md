@@ -619,13 +619,14 @@ enum SeatStatusEnum: int
 ```
 
 ###  ５．管理画面
+- ユーザー一覧を確認できます。（キーワード検索あり）
+- 
 ![230413_管理画面の検索とCSV](https://user-images.githubusercontent.com/117082016/231552635-42e37564-29bc-42e5-8741-16493deec884.gif)
 
 
 ```php
 【コード概要】
-
-
+CSVファイルをアップロードすると、Ajax処理にてCSVファイルを取り込みます。
 =============================================================================
 
 ●app\Admin\Controllers\UserController.php
@@ -752,7 +753,7 @@ enum SeatStatusEnum: int
 ```
 
 
-
+てすと～てすと～
 
 
 
