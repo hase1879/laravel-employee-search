@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('zip_code')->nullable();;
             $table->string('present_address')->nullable();;
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
