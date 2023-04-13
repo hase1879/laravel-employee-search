@@ -35,7 +35,5 @@ class MapBoxService
             $ret[] = $key . ": " . $value;
         }
         return implode(";", $ret);
-
-        //return "width: {$this->width}px; height: {$this->height}px; top: {$this->top}px; left: {$this->left}px; ";
     }
 }
