@@ -1,5 +1,11 @@
+<h3>EmployeeSearch  &ensp;  -「座席＋社員名簿」管理 -</h3>
+<p>URL（ゲストログイン可）:https://dev-elb.laravel-employee.xyz</p>
 
-![TOPページ](https://user-images.githubusercontent.com/117082016/231522042-8600a0a5-4cde-4501-a5b4-d241d069d547.png)
+<br>
+
+<img width="850px" alt="230415_Top画面" src="https://user-images.githubusercontent.com/117082016/232177701-946d8f93-6d34-4ee1-86c3-5cfcf0e5017e.png">
+
+
 
 <br>
 <br>
@@ -115,7 +121,8 @@
 - 最初にアクセスするとアプリの紹介画面が表示されます。（非ログイン）
 - ヘッダーロゴを押すと、トップページへリダイレクト。
 
-![230409_Topページ](https://user-images.githubusercontent.com/117082016/231644192-49099f3a-0555-4268-b56b-6fa01f0c6b6c.gif)
+![230415_Top画面](https://user-images.githubusercontent.com/117082016/232177945-19da6b2a-7348-410a-9844-c34c0b9250d6.gif)
+
 
 <br>
 <br>
@@ -146,8 +153,8 @@
 
 ### ３－１．社員一覧を**表形式**で表示（Grid.js）
 
-(1) Grid.jsを使用し、社員一覧表を表示。
-(2) クリックするとモーダル表示
+- Grid.jsを使用し、社員一覧表を表示。
+- クリックするとモーダル表示
 
 <br>
 <br>
@@ -157,9 +164,9 @@
 
 【コード概要】
 DOMのリロード後、
-	①HTMLのtable要素からデータ取得（jQuery）
-	②Grid.jsにてデータ成形。
-	③HTMLにデータを戻し、表示。
+	(1)HTMLのtable要素からデータ取得（jQuery）
+	(2)Grid.jsにてデータ成形。
+	(3)HTMLにデータを戻し、表示。
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
 ●resources\view\seets
