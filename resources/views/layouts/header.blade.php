@@ -3,10 +3,20 @@
         <div class="container">
 
 
-            <a class="navbar-brand fw-bold" href="{{ url('/') }}">
-                <img src="{{ asset('img/directory.png') }}" style="width:30px; height:auto; padding-bottom:2px;">
-                {{ config('app.name', 'Laravel') }}
-            </a>
+            @if (Auth::check())
+                {{-- ログイン済み --}}
+                <a class="navbar-brand fw-bold" href="{{ route('seets.index') }}">
+                    <img src="{{ asset('img/directory.png') }}" style="width:30px; height:auto; padding-bottom:2px;">
+                    {{ config('app.name', 'EmployeeSearch') }}
+                </a>
+            @else
+                {{-- 未ログイン --}}
+                <a class="navbar-brand fw-bold" href="{{ url('/') }}">
+                    <img src="{{ asset('img/directory.png') }}" style="width:30px; height:auto; padding-bottom:2px;">
+                    {{ config('app.name', 'EmployeeSearch') }}
+                </a>
+            @endif
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -15,13 +25,10 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">ホーム</a>
+                        <a class="nav-link" href="{{ route('seets.index') }}">座席表</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('employees.index') }}">社員一覧</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('seets.index') }}">座席表</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('mypage') }}">マイページ</a>

@@ -14,7 +14,6 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
 });
 
 Breadcrumbs::for('employees.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
     $trail->push('社員一覧', route('employees.index'));
 });
 
@@ -25,7 +24,6 @@ Breadcrumbs::for('employees.show', function (BreadcrumbTrail $trail, $id) {
 });
 
 Breadcrumbs::for('seets.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
     $trail->push('座席表', route('seets.index'));
 });
 

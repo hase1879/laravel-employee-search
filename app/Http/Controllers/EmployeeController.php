@@ -22,18 +22,11 @@ class EmployeeController extends Controller
         try{
             $employee_list = $service->employeeList($employees,$dept_keyword);
         }catch(Exception $e){
-            return redirect()->route('home')->with('message', $e->getMessage());
+            return redirect()->route('employees.index')->with('message', $e->getMessage());
         }
 
         // カテゴリー用にデータ取得a
         $depts = Dept::all()->groupBy('first_dept');
-
-        // $status = 1;
-        // $service = new SeatStatusNameService;
-        // $statusName = $service->seatStatusName($status);
-        // dd($statusName);
-
-
 
         return view('employees.index', compact('employee_list', 'depts'));
     }

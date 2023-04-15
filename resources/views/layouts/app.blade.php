@@ -32,6 +32,11 @@
     crossorigin="anonymous"
     />
 
+    {{-- toastr --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
     {{-- ログイン画面_CSS --}}
     <link rel="stylesheet" href="{{ asset('/css/login.css') }}">
     <style>

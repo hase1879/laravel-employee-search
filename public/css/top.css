@@ -1,100 +1,38 @@
 /*
-* ファーストビュー
+* first_view
 */
-/* 背景 */
-.first-view-flex {
+/* 親要素_背景 */
+.firstView-bg-gray-beside {
+    display: flex;
     width: 100vw;
-    height: 663px;
-    background-color: #400DD1;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff8b;
 }
 
-/* 親側 */
-.first-view {
-background-color: rgb(0, 0, 0);
-width: 840px;
-height: 663px;
-top: 0%;
-left: 50%;
-transform: translateX(-50%);
-background-color: #400DD1;
-background-position: center;
-background-size: contain;
-background-repeat: no-repeat;
-position: relative;
-padding: 20px 40px;
-}
-
-/* 子要素_パソコンの画像 */
-.first-view .pc {
-font-size: 14px;
-width: 500px;
-height: auto;
-top: 289px;
-left: 325px;
-text-align: center;
-display: flex;
-align-items: center;
-justify-content: center;
-position: absolute;
-}
-
-/* 子要素_頭を抱える女の子の画像 */
-.atamakakaeru{
-    width: 150px;
-    height: 150px;
-    top: 53px;
-    left: 313px;
-    position: absolute;
-    background-image: url("../img/first_view_atamakakaeru.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat:no-repeat;
-    opacity: 0.3;
-    z-index: 10 !important;
-}
-
-/* 子要素_テキスト１ */
-.first-view .primary-text{
-    color:#fff;
-    z-index: 99 !important;
-    position: absolute;
+/* 子要素_テキスト */
+.firstView-box-text{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 407px;
+    height: 300px;
+    font-size: 16px;
     letter-spacing: 0.05em;
     line-height: 1.5;
 }
 
-/* 子要素_テキスト２ */
-.first-view .secondary-text{
-    padding: 10px 0 6px 0 ;
-    margin: 0;
-    font-size: large;
-    letter-spacing: 0.05em;
-    position: absolute;
-    top: 205px;
+/* 子要素_PCの画像 */
+.firstView-pc {
+    width: 350px;
+    height: 350px;
+    background-image: url("../img/first_view_pc_seatmap.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat:no-repeat;
+    margin-left: 30px;
 }
-
-/* 子要素_ボタン一色 */
-.btn--orange,
-a.btn--orange {
-  color: #fff;
-  background-color: #4158D0;
-  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-  width: 113px;
-  position: absolute;
-  top: 260px;
-}
-
-.btn--orange:hover,
-a.btn--orange:hover {
-  color: #fff;
-  background-image: radial-gradient(closest-corner, rgba(150, 167, 241, 1) 10%, rgba(115, 248, 246, 1));
-  opacity: 0.75;
-  width: 113px;
-}
-
-a.btn--radius {
-   border-radius: 100vh;
-}
-
 
 /*
 * section_EmployeeSearchとは？
@@ -113,7 +51,7 @@ a.btn--radius {
     justify-content: center;
     text-align: center;
     font-size: 32px;
-    margin-top: 150px;
+    margin-top: 80px;
 }
 
 /* 親要素 */
