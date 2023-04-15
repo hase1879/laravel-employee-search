@@ -48,10 +48,10 @@ Route::get('/employees/{id}', [EmployeeController::class, 'show'])->name('employ
 
 // マイページ
 Route::controller(UserController::class)->group(function(){
-    Route::get('users/mypage', 'mypage')->name('mypage');
-    Route::get('users/mypage/edit', 'edit')->name('mypage.edit');
-    Route::put('users/mypage', 'update')->name('mypage.update');
-    Route::get('users/mypage/password/edit', 'edit_password')->name('mypage.edit_password');
-    Route::put('users/mypage/password', 'update_password')->name('mypage.update_password');
+    Route::get('users/mypage', 'mypage')->name('mypage')->middleware(['auth', 'verified']);
+    Route::get('users/mypage/edit', 'edit')->name('mypage.edit')->middleware(['auth', 'verified']);
+    Route::put('users/mypage', 'update')->name('mypage.update')->middleware(['auth', 'verified']);
+    Route::get('users/mypage/password/edit', 'edit_password')->name('mypage.edit_password')->middleware(['auth', 'verified']);
+    Route::put('users/mypage/password', 'update_password')->name('mypage.update_password')->middleware(['auth', 'verified']);
 });
 

@@ -45,19 +45,19 @@
                         ログイン
                     </button>
 
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <input type="hidden" name="email" value="demo@example.com" />
-                        <input type="hidden" name="password" value="demo" />
-
-                        <input type="submit" value="ゲストログイン" class="btn btn-outline-danger w-100 mt-3" />
-                    </form>
-
                     <a class="btn btn-link mt-3 d-flex justify-content-center samuraimart-login-text" href="{{ route('password.request') }}">
                         パスワードをお忘れの場合
                     </a>
                 </div>
+            </form>
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <input type="hidden" name="email" value="demo@example.com" />
+                <input type="hidden" name="password" value="demo" />
+
+                <input type="submit" value="ゲストログイン" class="btn btn-outline-danger w-100 mt-3" />
             </form>
 
             <hr>
