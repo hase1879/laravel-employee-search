@@ -902,7 +902,14 @@ CSVファイルをアップロードすると、Ajax処理にてCSVファイル�
 
 ```
 
+<br>
+<br>
 
+##  ６．マイページ
+
+- 社員情報・パスワードの編集が出来ます。
+
+<img width="868" alt="image" src="https://user-images.githubusercontent.com/117082016/232179643-3d788ae7-2fe7-40b9-a772-356bb312616c.png">
 
 
 
