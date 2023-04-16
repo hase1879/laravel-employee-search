@@ -17,6 +17,7 @@ class TopPageTest extends TestCase
     {
         $response = $this->get('/');
 
+        // （'/'）のページの表示テスト
         $response->assertStatus(200);
 
         $content = $response->content();

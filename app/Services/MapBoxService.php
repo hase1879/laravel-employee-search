@@ -34,6 +34,7 @@ class MapBoxService
         foreach($styles as $key => $value){
             $ret[] = $key . ": " . $value;
         }
+        // 区切り文字を結合
         return implode(";", $ret);
     }
 }

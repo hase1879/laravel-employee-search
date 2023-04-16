@@ -14,8 +14,14 @@ class MapBoxServiceTest extends TestCase
      */
     public function test_example()
     {
+
+        /**
+         * 座席表ページのMapBoxServiceクラスのテスト
+         */
+
         $this->assertTrue(true);
 
+        // テストデータを投入
         $box = new MapBoxService(
             "hoge",
             "1",
@@ -27,8 +33,10 @@ class MapBoxServiceTest extends TestCase
             500
         );
 
+        // 値を指定の文字列へ変換
         $ret = $box->toStyle();
 
+        // 指定どおりに文字列が変換できているかチェック
         $this->assertStringContainsString(
             "width: 100px",
             $ret
