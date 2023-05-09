@@ -17,7 +17,8 @@ function setup_seat(box_list, map_image, edit_url){
             $div.css('background-color','rgba(0, 102, 255, 0.463)');
         }
 
-        $div.html(box.label+"<br>"+box.seat_user);
+        // ToDo:検索対象の名前を赤字に変換
+        $div.html("<div>"+box.label+"<br>"+"<div class=text>"+box.seat_user+"</div>"+"</div");
         $div.on("click", () => {
             if(confirm('「' + box.label + '」の着席状況を更新しますか？')) {
 
@@ -28,8 +29,6 @@ function setup_seat(box_list, map_image, edit_url){
     }
     console.log(box_list);
 
-
-    // const map_image = @json($map_image);
     console.log(map_image);
 
     $(".map").css("background-image","url(.." + map_image + ")");

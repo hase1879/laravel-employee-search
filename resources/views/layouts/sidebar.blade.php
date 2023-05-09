@@ -15,7 +15,6 @@
                         </details>
                     @endforeach
                 </ul>
-
             </div>
         </div>
     </div>

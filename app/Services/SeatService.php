@@ -65,7 +65,6 @@ class SeatService
         $着席情報->status = Sitdown::STATUS_CHAKUSEKI;
         $着席情報->save();
 
-        //$着席情報 = Sitdown::where("user_id","=",$user->id)->firstOrNew();
     }
 
     function 会議中に変更(User $user)

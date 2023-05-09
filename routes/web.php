@@ -55,3 +55,6 @@ Route::controller(UserController::class)->group(function(){
     Route::put('users/mypage/password', 'update_password')->name('mypage.update_password')->middleware(['auth', 'verified']);
 });
 
+Route::get('/test-seat-user', function () {
+    return view('test-seat-user');
+});
